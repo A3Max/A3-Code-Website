@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "A3Coder - Ship Real Code From Specs That Actually Work",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body className="antialiased">
         <AuthProvider>
           {children}
+          <Footer />
         </AuthProvider>
       </body>
     </html>

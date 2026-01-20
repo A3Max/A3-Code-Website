@@ -214,18 +214,8 @@ export default function SpecsPage() {
           <div className="fixed top-[72px] left-0 right-0 h-[24px] bg-black z-[35] pointer-events-none" />
 
           <div className="flex flex-col lg:flex-row gap-8">
-            <div className={`${isAuthenticated ? 'w-full' : 'flex-1'}`}>
+            <div className="flex-1">
               <div className="sticky top-24 bg-black z-40 pb-6 mb-6">
-                {isAuthenticated && (
-                  <div className="mb-6">
-                    <Link 
-                      href="/create-spec" 
-                      className="block w-full px-6 py-3 text-center font-bold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors h-[52px] flex items-center justify-center"
-                    >
-                      Create Spec
-                    </Link>
-                  </div>
-                )}
                 <div className="mb-6">
                   <input
                     type="text"
@@ -256,7 +246,7 @@ export default function SpecsPage() {
                 </div>
               </div>
 
-              <div className={`grid gap-6 relative z-30 ${isAuthenticated ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-30">
                 {filteredSpecs.map((spec, index) => (
                   <SpecCard 
                     key={index} 
@@ -278,46 +268,44 @@ export default function SpecsPage() {
               )}
             </div>
 
-            {!isAuthenticated && (
-              <div className="lg:w-96">
-                <Link 
-                  href="/create-spec" 
-                  className="block w-full px-6 py-3 text-center font-bold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors mb-6 sticky top-24 h-[52px] flex items-center justify-center"
-                >
-                  Create Spec
-                </Link>
-                
-                <div className="bg-white/5 border border-white/10 p-6 mb-6 sticky top-[172px]">
-                  <div className="flex items-baseline gap-2 mb-4">
-                    <img src="/A3 spacedSmall.svg" alt="A3" className="h-8" />
-                    <h3 className="text-xl font-bold text-white">Coder Community</h3>
-                  </div>
-                  <p className="text-white/70 mb-6">
-                    Sign in to explore our curated registry of executable specifications. View specs, download them, and discover how A3Coder can help you build faster. Upgrade to Elite to execute specs frictionlessly in the cloud with dedicated resources.
-                  </p>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-center gap-3 text-white/80">
-                      <div className="w-2 h-2 bg-[#306bff]" />
-                      Browse Specs
-                    </li>
-                    <li className="flex items-center gap-3 text-white/80">
-                      <div className="w-2 h-2 bg-[#306bff]" />
-                      Download Specs
-                    </li>
-                    <li className="flex items-center gap-3 text-white/80">
-                      <div className="w-2 h-2 bg-[#306bff]" />
-                      Cloud Execution
-                    </li>
-                  </ul>
-                  <Link 
-                    href="/login" 
-                    className="block w-full px-6 py-3 text-center font-semibold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors"
-                  >
-                    Sign In to Get Started
-                  </Link>
+            <div className="lg:w-96">
+              <Link 
+                href="/create-spec" 
+                className="block w-full px-6 py-3 text-center font-bold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors mb-6 sticky top-24 h-[52px] flex items-center justify-center"
+              >
+                Create Spec
+              </Link>
+              
+              <div className="bg-white/5 border border-white/10 p-6 mb-6 sticky top-[172px]">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <img src="/A3 spacedSmall.svg" alt="A3" className="h-8" />
+                  <h3 className="text-xl font-bold text-white">Coder Community</h3>
                 </div>
+                <p className="text-white/70 mb-6">
+                  Sign in to explore our curated registry of executable specifications. View specs, download them, and discover how A3Coder can help you build faster. Upgrade to Elite to execute specs frictionlessly in the cloud with dedicated resources.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center gap-3 text-white/80">
+                    <div className="w-2 h-2 bg-[#306bff]" />
+                    Browse Specs
+                  </li>
+                  <li className="flex items-center gap-3 text-white/80">
+                    <div className="w-2 h-2 bg-[#306bff]" />
+                    Download Specs
+                  </li>
+                  <li className="flex items-center gap-3 text-white/80">
+                    <div className="w-2 h-2 bg-[#306bff]" />
+                    Cloud Execution
+                  </li>
+                </ul>
+                <Link 
+                  href="/login" 
+                  className="block w-full px-6 py-3 text-center font-semibold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors"
+                >
+                  Sign In to Get Started
+                </Link>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </main>

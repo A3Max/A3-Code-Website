@@ -1,7 +1,12 @@
+'use client';
+
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
+import ContactSalesModal from '@/components/ContactSalesModal';
 
 export default function PricingPage() {
+  const [showContactModal, setShowContactModal] = useState(false);
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
@@ -27,24 +32,36 @@ export default function PricingPage() {
 
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
                   <span>Access to community specs registry</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
-                  <span>A3Coder AI Agent VS Code extension</span>
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>A3Code AI Agent VS Code extension</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
-                  <span>Download specs, view spec definitions, view community comments</span>
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Download specs</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
-                  <span>Search/filter specs (by category)</span>
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>View spec definitions</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
-                  <span>Execute community specs directly in A3Coder VS Code desktop</span>
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>View community comments about specs</span>
+                </li>
+                <li className="flex items-start gap-3 text-white/80">
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Search for specs</span>
+                </li>
+                <li className="flex items-start gap-3 text-white/80">
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Filter by spec category</span>
+                </li>
+                <li className="flex items-start gap-3 text-white/80">
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Execute community specs directly in A3Code VS Code desktop</span>
                 </li>
               </ul>
 
@@ -71,24 +88,40 @@ export default function PricingPage() {
 
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
                   <span>All Hobbyist features</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
-                  <span>Create own specs; AI-powered spec creation/review</span>
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Create your own specs</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
-                  <span>Create private specs; edit specs; share with community</span>
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>AI-powered spec creation and review</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
-                  <span>Run specs created by professionals; eligibility for ranking</span>
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Create private specs</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-[#306bff] flex-shrink-0 mt-0.5" />
-                  <span>Execute professional specs directly in A3Coder VS Code desktop</span>
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Edit your specs</span>
+                </li>
+                <li className="flex items-start gap-3 text-white/80">
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Share specs with the community</span>
+                </li>
+                <li className="flex items-start gap-3 text-white/80">
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Run specs created by professionals</span>
+                </li>
+                <li className="flex items-start gap-3 text-white/80">
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Your shared specs will be eligible for ranking</span>
+                </li>
+                <li className="flex items-start gap-3 text-white/80">
+                  <div className="w-2 h-2 bg-[#306bff] flex-shrink-0 mt-1.5" />
+                  <span>Execute professional specs directly in A3Code VS Code desktop</span>
                 </li>
               </ul>
 
@@ -115,36 +148,36 @@ export default function PricingPage() {
 
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-orange-500 flex-shrink-0 mt-0.5" />
+                  <div className="w-2 h-2 bg-orange-500 flex-shrink-0 mt-1.5" />
                   <span>All Professional features</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-orange-500 flex-shrink-0 mt-0.5" />
-                  <span>Dedicated cloud CPU/memory/storage</span>
+                  <div className="w-2 h-2 bg-orange-500 flex-shrink-0 mt-1.5" />
+                  <span>Dedicated cloud CPU, memory, and storage</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-orange-500 flex-shrink-0 mt-0.5" />
-                  <span>Run own A3Coder AI Agent in the cloud</span>
+                  <div className="w-2 h-2 bg-orange-500 flex-shrink-0 mt-1.5" />
+                  <span>Run your own A3Code AI Agent in the cloud</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-orange-500 flex-shrink-0 mt-0.5" />
+                  <div className="w-2 h-2 bg-orange-500 flex-shrink-0 mt-1.5" />
                   <span>LLM provider key management</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-orange-500 flex-shrink-0 mt-0.5" />
-                  <span>Run A3Coder AI Agent in separate browser tab</span>
+                  <div className="w-2 h-2 bg-orange-500 flex-shrink-0 mt-1.5" />
+                  <span>Run A3Code AI Agent in separate browser tab</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-orange-500 flex-shrink-0 mt-0.5" />
-                  <span>Download code/artifacts generated by AI Agent</span>
+                  <div className="w-2 h-2 bg-orange-500 flex-shrink-0 mt-1.5" />
+                  <span>Download code & artifacts generated by AI Agent</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-orange-500 flex-shrink-0 mt-0.5" />
-                  <span>Host/share dashboards created by AI Agent</span>
+                  <div className="w-2 h-2 bg-orange-500 flex-shrink-0 mt-1.5" />
+                  <span>Host and share dashboards created by AI Agent</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/80">
-                  <div className="w-5 h-5 bg-orange-500 flex-shrink-0 mt-0.5" />
-                  <span>Execute any spec instantly in A3Coder VS Code cloud</span>
+                  <div className="w-2 h-2 bg-orange-500 flex-shrink-0 mt-1.5" />
+                  <span>Execute any spec instantly in the A3Code VS Code cloud</span>
                 </li>
               </ul>
 
@@ -162,15 +195,16 @@ export default function PricingPage() {
             <p className="text-lg text-white/70 max-w-2xl mx-auto mb-8">
               Not sure which plan is right for you? Contact our sales team for enterprise solutions and custom requirements.
             </p>
-            <Link 
-              href="/contact" 
-              className="inline-block px-8 py-4 text-lg font-semibold border border-white text-white hover:border-[#306bff] hover:text-[#306bff] transition-colors"
+            <button 
+              onClick={() => setShowContactModal(true)}
+              className="inline-block px-8 py-4 text-lg font-semibold border border-[#306bff] text-[#306bff] hover:bg-[#306bff] hover:text-white transition-colors"
             >
               Contact Sales
-            </Link>
+            </button>
           </div>
         </div>
       </main>
+      <ContactSalesModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </div>
   );
 }
