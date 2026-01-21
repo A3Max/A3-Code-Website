@@ -1,9 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
+import SimpleFooter from '@/components/SimpleFooter';
 import Link from 'next/link';
 import MySpecCard from '@/components/MySpecCard';
+import Sidebar from '@/components/Sidebar';
+import { useAuth } from '@/contexts/AuthContext';
 
 const categories = [
   'All',
@@ -17,11 +20,31 @@ const categories = [
   'Website',
   'Microservices',
   'Financial',
-  'Other'
+  'Other',
+  'Machine Learning',
+  'DevOps',
+  'Security',
+  'Testing',
+  'Documentation',
+  'UI/UX',
+  'Mobile',
+  'Cloud',
+  'Blockchain',
+  'IoT',
+  'AR/VR',
+  'Automation',
+  'Analytics',
+  'Database',
+  'API',
+  'Performance',
+  'Accessibility',
+  'Localization',
+  'Monitoring'
 ];
 
 const mySpecs = [
   {
+    id: '1',
     title: 'Custom Neural Network Training Pipeline, This is a text line to create a three lined card title and this shouldbe enough',
     category: 'Model Training',
     tier: 'Tier 2',
@@ -32,6 +55,7 @@ const mySpecs = [
     thumbnail: 'neural'
   },
   {
+    id: '2',
     title: 'Remixed: Real-time Stock Price Forecasting with LSTM',
     category: 'Forecasting',
     tier: 'Tier 1',
@@ -42,6 +66,7 @@ const mySpecs = [
     thumbnail: 'stock'
   },
   {
+    id: '3',
     title: 'Personal Portfolio Website Generator',
     category: 'Website',
     tier: 'Tier 2',
@@ -52,6 +77,7 @@ const mySpecs = [
     thumbnail: 'portfolio'
   },
   {
+    id: '4',
     title: 'Remixed: Physics-based 2D Platformer Game Engine',
     category: '2D / 3D Games',
     tier: 'Tier 2',
@@ -62,6 +88,7 @@ const mySpecs = [
     thumbnail: 'game'
   },
   {
+    id: '5',
     title: 'Custom Smart Contract Generator for ERC-20 Tokens',
     category: 'Smart Contracts',
     tier: 'Tier 1',
@@ -72,6 +99,7 @@ const mySpecs = [
     thumbnail: 'contract'
   },
   {
+    id: '6',
     title: 'Remixed: Video Processing Pipeline with Object Detection',
     category: 'Audio & Video',
     tier: 'Tier 3',
@@ -82,6 +110,7 @@ const mySpecs = [
     thumbnail: 'video'
   },
   {
+    id: '7',
     title: 'Multi-Database Integration System with ETL Pipeline',
     category: 'Data Integration',
     tier: 'Tier 3',
@@ -92,6 +121,7 @@ const mySpecs = [
     thumbnail: 'database'
   },
   {
+    id: '8',
     title: 'Automated Literature Review and Summarization Tool',
     category: 'Research',
     tier: 'Tier 2',
@@ -102,6 +132,7 @@ const mySpecs = [
     thumbnail: 'research'
   },
   {
+    id: '9',
     title: '3D Point Particle Video/Audio Visualiser + Timeline with Keyframing',
     category: 'Audio & Video',
     tier: 'Tier 1',
@@ -112,6 +143,7 @@ const mySpecs = [
     thumbnail: 'visualizer'
   },
   {
+    id: '10',
     title: 'E-commerce Website with Payment Integration',
     category: 'Website',
     tier: 'Tier 2',
@@ -122,6 +154,7 @@ const mySpecs = [
     thumbnail: 'ecommerce'
   },
   {
+    id: '11',
     title: 'Microservices Architecture with API Gateway',
     category: 'Microservices',
     tier: 'Tier 3',
@@ -132,6 +165,7 @@ const mySpecs = [
     thumbnail: 'microservices'
   },
   {
+    id: '12',
     title: 'Portfolio Optimization Algorithm for Crypto Assets',
     category: 'Financial',
     tier: 'Tier 2',
@@ -142,6 +176,7 @@ const mySpecs = [
     thumbnail: 'portfolio'
   },
   {
+    id: '13',
     title: 'Natural Language Processing for Sentiment Analysis',
     category: 'Model Training',
     tier: 'Tier 2',
@@ -152,6 +187,7 @@ const mySpecs = [
     thumbnail: 'nlp'
   },
   {
+    id: '14',
     title: 'Time Series Analysis for Sales Prediction',
     category: 'Forecasting',
     tier: 'Tier 1',
@@ -162,6 +198,7 @@ const mySpecs = [
     thumbnail: 'timeseries'
   },
   {
+    id: '15',
     title: '3D Racing Game with Multiplayer Support',
     category: '2D / 3D Games',
     tier: 'Tier 3',
@@ -172,6 +209,7 @@ const mySpecs = [
     thumbnail: 'racing'
   },
   {
+    id: '16',
     title: 'DeFi Yield Farming Strategy Optimizer',
     category: 'Financial',
     tier: 'Tier 3',
@@ -182,6 +220,7 @@ const mySpecs = [
     thumbnail: 'defi'
   },
   {
+    id: '17',
     title: 'Custom Chatbot with RAG Implementation',
     category: 'Model Training',
     tier: 'Tier 2',
@@ -192,6 +231,7 @@ const mySpecs = [
     thumbnail: 'chatbot'
   },
   {
+    id: '18',
     title: 'Real-time Data Visualization Dashboard',
     category: 'Website',
     tier: 'Tier 2',
@@ -202,6 +242,7 @@ const mySpecs = [
     thumbnail: 'dashboard'
   },
   {
+    id: '19',
     title: 'Automated Testing Framework for Web Applications',
     category: 'Research',
     tier: 'Tier 1',
@@ -212,6 +253,7 @@ const mySpecs = [
     thumbnail: 'testing'
   },
   {
+    id: '20',
     title: 'Blockchain-based Supply Chain Tracker',
     category: 'Smart Contracts',
     tier: 'Tier 3',
@@ -222,6 +264,7 @@ const mySpecs = [
     thumbnail: 'blockchain'
   },
   {
+    id: '21',
     title: 'Image Recognition API with TensorFlow',
     category: 'Model Training',
     tier: 'Tier 2',
@@ -232,6 +275,7 @@ const mySpecs = [
     thumbnail: 'image'
   },
   {
+    id: '22',
     title: 'Voice Assistant with Speech Recognition',
     category: 'Audio & Video',
     tier: 'Tier 2',
@@ -242,6 +286,7 @@ const mySpecs = [
     thumbnail: 'voice'
   },
   {
+    id: '23',
     title: 'Social Media Analytics Platform',
     category: 'Data Integration',
     tier: 'Tier 2',
@@ -252,6 +297,7 @@ const mySpecs = [
     thumbnail: 'social'
   },
   {
+    id: '24',
     title: 'Mobile App Backend with GraphQL',
     category: 'Microservices',
     tier: 'Tier 2',
@@ -264,9 +310,23 @@ const mySpecs = [
 ];
 
 export default function MySpecsPage() {
+  const { isAuthenticated } = useAuth();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [specs, setSpecs] = useState(mySpecs);
+  const specsGridRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (specsGridRef.current) {
+      specsGridRef.current.scrollTop = 0;
+    }
+  }, [searchQuery, selectedCategories]);
 
   const toggleCategory = (category: string) => {
     if (category === 'All') {
@@ -280,84 +340,70 @@ export default function MySpecsPage() {
     }
   };
 
-  const filteredSpecs = mySpecs.filter(spec => {
+  const filteredSpecs = specs.filter(spec => {
     const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(spec.category);
     const matchesSearch = spec.title.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
+  const handleDelete = (id: string) => {
+    setSpecs(prev => prev.filter(spec => spec.id !== id));
+  };
+
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[#e4e4e4]">
       <Navbar />
       
-      <main className="pt-24 pb-32">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="mb-8 relative z-[45]">
-            <h1 className="text-4xl font-bold text-white mb-4">My Specs</h1>
-            <p className="text-lg text-white/70">
-              Your personal collection of designed and remixed specifications.
-            </p>
+      <main className="pb-32">
+        <Sidebar 
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          selectedCategories={selectedCategories}
+          toggleCategory={toggleCategory}
+          categories={categories}
+          isAuthenticated={isAuthenticated}
+          showCommunityCard={false}
+        />
+        
+        <div className="pl-[280px]">
+          <div className="sticky top-[72px] z-[45] bg-[#e4e4e4] pt-12">
+            <div className="px-6 pb-4">
+              <h1 className="text-4xl font-bold text-[#1a1a1a] mb-4">My Specs</h1>
+              <p className="text-lg text-black/70">
+                Your personal collection of designed and remixed specifications.
+              </p>
+            </div>
           </div>
 
-          <div className="fixed top-[72px] left-0 right-0 h-[24px] bg-black z-[35] pointer-events-none" />
-
-          <div className="flex flex-col lg:flex-row gap-8">
-            <div className="flex-1">
-              <div className="sticky top-24 bg-black z-40 pb-6 mb-6">
-                <div className="mb-6">
-                  <input
-                    type="text"
-                    placeholder="Search your specs..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 h-[52px] bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-[#306bff]"
-                  />
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-semibold text-white mb-4">FILTER BY CATEGORY</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {categories.map((category) => (
-                      <button
-                        key={category}
-                        onClick={() => toggleCategory(category)}
-                        className={`px-4 py-2 text-sm font-medium transition-colors ${
-                          (category === 'All' && selectedCategories.length === 0) || selectedCategories.includes(category)
-                            ? 'bg-[#306bff] text-white'
-                            : 'bg-white/5 text-white hover:bg-white/10'
-                        }`}
-                      >
-                        {category}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-30">
-                {filteredSpecs.map((spec, index) => (
-                  <MySpecCard 
-                    key={index} 
-                    {...spec} 
-                    index={index} 
-                    hoveredIndex={hoveredIndex}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                  />
-                ))}
-              </div>
-
-              {filteredSpecs.length === 0 && (
-                <div className="border-t border-white/10 pt-8">
-                  <p className="text-white/50 text-center py-12">
-                    No specs found. Start creating or remixing specs to build your collection!
-                  </p>
-                </div>
-              )}
+          <div className="px-6 pt-20 pb-12">
+            <div ref={specsGridRef} className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(380px,1fr))]">
+              {filteredSpecs.map((spec, index) => (
+                <MySpecCard
+                  key={spec.id}
+                  {...spec}
+                  index={index}
+                  hoveredIndex={hoveredIndex}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  isOwner={true}
+                  onDelete={handleDelete}
+                />
+              ))}
             </div>
+
+            {filteredSpecs.length === 0 && (
+              <div className="border-t border-black/10 pt-8">
+                <p className="text-black/50 text-center py-12">
+                  No specs found. Start creating or remixing specs to build your collection!
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </main>
+      <div className="pl-[280px]">
+        <SimpleFooter />
+      </div>
     </div>
   );
 }

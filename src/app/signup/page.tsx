@@ -21,38 +21,38 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[#e4e4e4]">
       <Navbar />
       
       <main className="pt-24">
         <div className="max-w-md mx-auto px-6 py-12">
-          <div className="bg-white/5 border border-white/10 p-8">
-            <h1 className="text-3xl font-bold text-white mb-6">Create Account</h1>
+          <div className="bg-[#e4e4e4] shadow-lg border border-black/10 p-8 hover:border-[#306bff]/50 transition-colors">
+            <h1 className="text-3xl font-bold text-[#1a1a1a] mb-6">Create Account</h1>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Name</label>
+                <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Name</label>
                 <input
                   type="text"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-[#306bff]"
+                  className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff]"
                   placeholder="Your name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Email</label>
+                <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Email</label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-[#306bff]"
+                  className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff]"
                   placeholder="you@example.com"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Password</label>
+                <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Password</label>
                 <input
                   type="password"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-[#306bff]"
+                  className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff]"
                   placeholder="••••••••"
                 />
               </div>
@@ -65,7 +65,7 @@ export default function SignupPage() {
               </button>
             </form>
 
-            <p className="text-center text-white/60 mt-6">
+            <p className="text-center text-black/60 mt-6">
               Already have an account?{' '}
               <Link href="/login" className="text-[#306bff] hover:underline">
                 Sign in

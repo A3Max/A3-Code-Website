@@ -124,18 +124,18 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
   if (isSubmitted) {
     return createPortal(
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4" onClick={handleClose}>
-        <div className="bg-[#0a0a0a] border border-white/10 rounded-lg max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+        <div className="bg-white border border-black/10 rounded-lg max-w-md w-full" onClick={(e) => e.stopPropagation()}>
           <div className="p-8 text-center">
             <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">Thanks!</h3>
-            <p className="text-lg text-white/70 mb-6">
+            <h3 className="text-2xl font-bold text-[#1a1a1a] mb-4">Thanks!</h3>
+            <p className="text-lg text-black/70 mb-6">
               A sales representative will reach out to you within 1 business day.
             </p>
-            <p className="text-sm text-white/50 mb-6">
+            <p className="text-sm text-black/50 mb-6">
               We've sent a confirmation email to {formData.email}
             </p>
             <button
@@ -153,17 +153,17 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
 
   return createPortal(
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4" onClick={handleClose}>
-      <div className="bg-[#0a0a0a] border border-white/10 rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-        <div className="sticky top-0 bg-[#0a0a0a] border-b border-white/10 p-4 flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-white">Contact Sales</h3>
-          <button onClick={handleClose} className="text-white/60 hover:text-white transition-colors">
+      <div className="bg-white border border-black/10 rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="sticky top-0 bg-white border-b border-black/10 p-4 flex items-center justify-between">
+          <h3 className="text-xl font-semibold text-[#1a1a1a]">Contact Sales</h3>
+          <button onClick={handleClose} className="text-black/60 hover:text-black transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
         <div className="p-6">
-          <p className="text-sm text-white/70 mb-6">
+          <p className="text-sm text-black/70 mb-6">
             A sales representative will respond within 1 business day.
           </p>
 
@@ -175,7 +175,7 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
 
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             <div>
-              <label htmlFor="modal-name" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="modal-name" className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Name <span className="text-red-400">*</span>
               </label>
               <input
@@ -184,8 +184,8 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
                 type="text"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-white/5 border text-white placeholder-white/50 focus:outline-none focus:border-[#306bff] transition-colors ${
-                  errors.name ? 'border-red-500' : 'border-white/10'
+                className={`w-full px-4 py-3 bg-white border text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff] transition-colors ${
+                  errors.name ? 'border-red-500' : 'border-black/10'
                 }`}
                 placeholder="Your name"
                 maxLength={150}
@@ -200,7 +200,7 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
             </div>
 
             <div>
-              <label htmlFor="modal-email" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="modal-email" className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Work email <span className="text-red-400">*</span>
               </label>
               <input
@@ -209,8 +209,8 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-white/5 border text-white placeholder-white/50 focus:outline-none focus:border-[#306bff] transition-colors ${
-                  errors.email ? 'border-red-500' : 'border-white/10'
+                className={`w-full px-4 py-3 bg-white border text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff] transition-colors ${
+                  errors.email ? 'border-red-500' : 'border-black/10'
                 }`}
                 placeholder="you@company.com"
                 maxLength={254}
@@ -225,7 +225,7 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
             </div>
 
             <div>
-              <label htmlFor="modal-company" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="modal-company" className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Company <span className="text-red-400">*</span>
               </label>
               <input
@@ -234,8 +234,8 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
                 type="text"
                 value={formData.company}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-white/5 border text-white placeholder-white/50 focus:outline-none focus:border-[#306bff] transition-colors ${
-                  errors.company ? 'border-red-500' : 'border-white/10'
+                className={`w-full px-4 py-3 bg-white border text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff] transition-colors ${
+                  errors.company ? 'border-red-500' : 'border-black/10'
                 }`}
                 placeholder="Your company name"
                 maxLength={200}
@@ -250,7 +250,7 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
             </div>
             
             <div>
-              <label htmlFor="modal-message" className="block text-sm font-medium text-white mb-2">
+              <label htmlFor="modal-message" className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Message <span className="text-red-400">*</span>
               </label>
               <textarea
@@ -259,8 +259,8 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
                 value={formData.message}
                 onChange={handleChange}
                 rows={4}
-                className={`w-full px-4 py-3 bg-white/5 border text-white placeholder-white/50 focus:outline-none focus:border-[#306bff] resize-none transition-colors ${
-                  errors.message ? 'border-red-500' : 'border-white/10'
+                className={`w-full px-4 py-3 bg-white border text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff] resize-none transition-colors ${
+                  errors.message ? 'border-red-500' : 'border-black/10'
                 }`}
                 placeholder="Tell us about your requirements..."
                 minLength={10}
@@ -294,7 +294,7 @@ export default function ContactSalesModal({ isOpen, onClose }: ContactSalesModal
               {isSubmitting ? 'Sending...' : 'Send'}
             </button>
 
-            <p className="text-center text-xs text-white/50">
+            <p className="text-center text-xs text-black/50">
               By submitting this form, you agree to our{' '}
               <a href="/privacy" className="text-[#306bff] hover:underline">
                 Privacy Policy

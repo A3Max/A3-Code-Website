@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
+import SimpleFooter from '@/components/SimpleFooter';
 import Link from 'next/link';
 import SpecCard from '@/components/SpecCard';
+import Sidebar from '@/components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
 
 const categories = [
@@ -18,11 +20,31 @@ const categories = [
   'Website',
   'Microservices',
   'Financial',
-  'Other'
+  'Other',
+  'Machine Learning',
+  'DevOps',
+  'Security',
+  'Testing',
+  'Documentation',
+  'UI/UX',
+  'Mobile',
+  'Cloud',
+  'Blockchain',
+  'IoT',
+  'AR/VR',
+  'Automation',
+  'Analytics',
+  'Database',
+  'API',
+  'Performance',
+  'Accessibility',
+  'Localization',
+  'Monitoring'
 ];
 
 const sampleSpecs = [
   {
+    id: '1',
     title: '3D Point Particle Video/Audio Visualiser + Timeline with Keyframing [MM]',
     category: 'Audio & Video',
     tier: 'Tier 1',
@@ -33,6 +55,7 @@ const sampleSpecs = [
     thumbnail: 'visualizer'
   },
   {
+    id: '2',
     title: 'Neural Network Training Pipeline for Image Classification',
     category: 'Model Training',
     tier: 'Tier 2',
@@ -43,6 +66,7 @@ const sampleSpecs = [
     thumbnail: 'neural'
   },
   {
+    id: '3',
     title: 'Real-time Stock Price Forecasting with LSTM',
     category: 'Forecasting',
     tier: 'Tier 1',
@@ -53,6 +77,7 @@ const sampleSpecs = [
     thumbnail: 'stock'
   },
   {
+    id: '4',
     title: 'Multi-Database Integration System with ETL Pipeline',
     category: 'Data Integration',
     tier: 'Tier 3',
@@ -63,6 +88,7 @@ const sampleSpecs = [
     thumbnail: 'database'
   },
   {
+    id: '5',
     title: 'Automated Literature Review and Summarization Tool',
     category: 'Research',
     tier: 'Tier 2',
@@ -73,6 +99,7 @@ const sampleSpecs = [
     thumbnail: 'research'
   },
   {
+    id: '6',
     title: 'Physics-based 2D Platformer Game Engine',
     category: '2D / 3D Games',
     tier: 'Tier 2',
@@ -83,6 +110,7 @@ const sampleSpecs = [
     thumbnail: 'game'
   },
   {
+    id: '7',
     title: 'Smart Contract Generator for ERC-20 Tokens',
     category: 'Smart Contracts',
     tier: 'Tier 1',
@@ -93,6 +121,7 @@ const sampleSpecs = [
     thumbnail: 'contract'
   },
   {
+    id: '8',
     title: 'Video Processing Pipeline with Object Detection',
     category: 'Audio & Video',
     tier: 'Tier 3',
@@ -103,6 +132,7 @@ const sampleSpecs = [
     thumbnail: 'video'
   },
   {
+    id: '9',
     title: 'E-commerce Website with Payment Integration',
     category: 'Website',
     tier: 'Tier 2',
@@ -113,6 +143,7 @@ const sampleSpecs = [
     thumbnail: 'ecommerce'
   },
   {
+    id: '10',
     title: 'Microservices Architecture with API Gateway',
     category: 'Microservices',
     tier: 'Tier 3',
@@ -123,6 +154,7 @@ const sampleSpecs = [
     thumbnail: 'microservices'
   },
   {
+    id: '11',
     title: 'Portfolio Optimization Algorithm for Crypto Assets',
     category: 'Financial',
     tier: 'Tier 2',
@@ -133,6 +165,7 @@ const sampleSpecs = [
     thumbnail: 'portfolio'
   },
   {
+    id: '12',
     title: 'Natural Language Processing for Sentiment Analysis',
     category: 'Model Training',
     tier: 'Tier 2',
@@ -143,6 +176,7 @@ const sampleSpecs = [
     thumbnail: 'nlp'
   },
   {
+    id: '13',
     title: 'Time Series Analysis for Sales Prediction',
     category: 'Forecasting',
     tier: 'Tier 1',
@@ -153,6 +187,7 @@ const sampleSpecs = [
     thumbnail: 'timeseries'
   },
   {
+    id: '14',
     title: '3D Racing Game with Multiplayer Support',
     category: '2D / 3D Games',
     tier: 'Tier 3',
@@ -163,6 +198,7 @@ const sampleSpecs = [
     thumbnail: 'racing'
   },
   {
+    id: '15',
     title: 'DeFi Yield Farming Strategy Optimizer',
     category: 'Financial',
     tier: 'Tier 3',
@@ -179,6 +215,19 @@ export default function SpecsPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [specs, setSpecs] = useState(sampleSpecs);
+  const specsGridRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (specsGridRef.current) {
+      specsGridRef.current.scrollTop = 0;
+    }
+  }, [searchQuery, selectedCategories]);
 
   const toggleCategory = (category: string) => {
     if (category === 'All') {
@@ -192,6 +241,10 @@ export default function SpecsPage() {
     }
   };
 
+  const handleDelete = (id: string) => {
+    setSpecs(prev => prev.filter(spec => spec.id !== id));
+  };
+
   const filteredSpecs = sampleSpecs.filter(spec => {
     const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(spec.category);
     const matchesSearch = spec.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -199,116 +252,58 @@ export default function SpecsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[#e4e4e4]">
       <Navbar />
       
-      <main className="pt-24 pb-32">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="mb-8 relative z-[45]">
-            <h1 className="text-4xl font-bold text-white mb-4">Specs Registry</h1>
-            <p className="text-lg text-white/70">
-              A curated registry of executable specifications, designed to be run, reused, and improved over time.
-            </p>
+      <main className="pb-32">
+        <Sidebar 
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          selectedCategories={selectedCategories}
+          toggleCategory={toggleCategory}
+          categories={categories}
+          isAuthenticated={isAuthenticated}
+        />
+        
+        <div className="pl-[280px]">
+          <div className="sticky top-[72px] z-[45] bg-[#e4e4e4] pt-12">
+            <div className="px-6 pb-4">
+              <h1 className="text-4xl font-bold text-[#1a1a1a] mb-4">Specs Registry</h1>
+              <p className="text-lg text-black/70">
+                A curated registry of executable specifications, designed to be run, reused, and improved over time.
+              </p>
+            </div>
           </div>
 
-          <div className="fixed top-[72px] left-0 right-0 h-[24px] bg-black z-[35] pointer-events-none" />
-
-          <div className="flex flex-col lg:flex-row gap-8">
-            <div className="flex-1">
-              <div className="sticky top-24 bg-black z-40 pb-6 mb-6">
-                <div className="mb-6">
-                  <input
-                    type="text"
-                    placeholder="Search specs..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 h-[52px] bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-[#306bff]"
-                  />
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-semibold text-white mb-4">FILTER BY CATEGORY</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {categories.map((category) => (
-                      <button
-                        key={category}
-                        onClick={() => toggleCategory(category)}
-                        className={`px-4 py-2 text-sm font-medium transition-colors ${
-                          (category === 'All' && selectedCategories.length === 0) || selectedCategories.includes(category)
-                            ? 'bg-[#306bff] text-white'
-                            : 'bg-white/5 text-white hover:bg-white/10'
-                        }`}
-                      >
-                        {category}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-30">
-                {filteredSpecs.map((spec, index) => (
-                  <SpecCard 
-                    key={index} 
-                    {...spec} 
-                    index={index} 
-                    hoveredIndex={hoveredIndex}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                  />
-                ))}
-              </div>
-
-              {filteredSpecs.length === 0 && (
-                <div className="border-t border-white/10 pt-8">
-                  <p className="text-white/50 text-center py-12">
-                    No specs found. Be the first to create one!
-                  </p>
-                </div>
-              )}
+          <div className="px-6 pt-20 pb-12">
+            <div ref={specsGridRef} className={`grid gap-6 grid-cols-[repeat(auto-fit,minmax(380px,1fr))]`}>
+              {filteredSpecs.map((spec, index) => (
+                <SpecCard
+                  key={index}
+                  {...spec}
+                  index={index}
+                  hoveredIndex={hoveredIndex}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  isOwner={false}
+                  onDelete={handleDelete}
+                />
+              ))}
             </div>
 
-            <div className="lg:w-96">
-              <Link 
-                href="/create-spec" 
-                className="block w-full px-6 py-3 text-center font-bold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors mb-6 sticky top-24 h-[52px] flex items-center justify-center"
-              >
-                Create Spec
-              </Link>
-              
-              <div className="bg-white/5 border border-white/10 p-6 mb-6 sticky top-[172px]">
-                <div className="flex items-baseline gap-2 mb-4">
-                  <img src="/A3 spacedSmall.svg" alt="A3" className="h-8" />
-                  <h3 className="text-xl font-bold text-white">Coder Community</h3>
-                </div>
-                <p className="text-white/70 mb-6">
-                  Sign in to explore our curated registry of executable specifications. View specs, download them, and discover how A3Coder can help you build faster. Upgrade to Elite to execute specs frictionlessly in the cloud with dedicated resources.
+            {filteredSpecs.length === 0 && (
+              <div className="border-t border-black/10 pt-8">
+                <p className="text-black/50 text-center py-12">
+                  No specs found. Be the first to create one!
                 </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center gap-3 text-white/80">
-                    <div className="w-2 h-2 bg-[#306bff]" />
-                    Browse Specs
-                  </li>
-                  <li className="flex items-center gap-3 text-white/80">
-                    <div className="w-2 h-2 bg-[#306bff]" />
-                    Download Specs
-                  </li>
-                  <li className="flex items-center gap-3 text-white/80">
-                    <div className="w-2 h-2 bg-[#306bff]" />
-                    Cloud Execution
-                  </li>
-                </ul>
-                <Link 
-                  href="/login" 
-                  className="block w-full px-6 py-3 text-center font-semibold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors"
-                >
-                  Sign In to Get Started
-                </Link>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </main>
+      <div className="pl-[280px]">
+        <SimpleFooter />
+      </div>
     </div>
   );
 }
