@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import PulsingGrid from '@/components/PulsingGrid';
 
 export default function LoginPage() {
   const { login, signInWithGoogle } = useAuth();
@@ -22,9 +23,10 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[#e4e4e4]">
+      <PulsingGrid />
       <Navbar />
       
-      <main className="pt-24">
+      <main className="pt-24 relative z-10">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-[#1a1a1a] mb-2">Start Building</h1>
           <p className="text-lg text-black/60">Sign in to your account to continue</p>

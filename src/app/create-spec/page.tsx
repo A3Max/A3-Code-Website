@@ -1,11 +1,13 @@
 import Navbar from '@/components/Navbar';
+import PulsingGrid from '@/components/PulsingGrid';
 
 export default function CreateSpecPage() {
   return (
     <div className="min-h-screen bg-[#e4e4e4]">
+      <PulsingGrid />
       <Navbar />
       
-      <main className="pt-24">
+      <main className="pt-24 relative z-10">
         <div className="max-w-4xl mx-auto px-6 py-12">
           <h1 className="text-5xl font-bold text-[#1a1a1a] mb-6">Create New Spec</h1>
           <p className="text-xl text-black/70 mb-12">

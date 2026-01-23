@@ -6,15 +6,17 @@ import Footer from '@/components/Footer';
 import SimpleFooter from '@/components/SimpleFooter';
 import Link from 'next/link';
 import ContactSalesModal from '@/components/ContactSalesModal';
+import PulsingGrid from '@/components/PulsingGrid';
 
 export default function PricingPage() {
   const [showContactModal, setShowContactModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<'free' | 'pro' | 'elite'>('free');
   return (
     <div className="min-h-screen bg-[#e4e4e4]">
+      <PulsingGrid />
       <Navbar />
       
-      <main className="pt-24">
+      <main className="pt-24 relative z-10">
         <div className="max-w-7xl mx-auto px-6 pb-4 max-[707px]:px-4 max-[707px]:pb-6">
           <div className="text-center mb-16 max-[707px]:mb-8">
             <h1 className="text-5xl font-bold text-[#1a1a1a] mb-4 max-[707px]:text-3xl max-[640px]:text-2xl max-[375px]:text-xl">Choose Your Plan</h1>

@@ -273,7 +273,7 @@ export default function MySpecCard({ id, title, category, tier, date, duration, 
             <div className="w-40 h-40 overflow-hidden max-[707px]:w-24 max-[707px]:h-24">
               <img src="/Screenshot 2026-01-21 at 11.31.08.png" alt="Spec thumbnail" className="w-full h-full object-cover" />
             </div>
-            <button onClick={() => setShowImagePreview(true)} className="w-full mt-2 px-2 py-1 text-xs font-medium bg-orange-500 text-white hover:bg-orange-600 transition-colors">
+            <button onClick={() => setShowImagePreview(true)} className="w-full mt-2 px-2 py-1 text-xs font-medium bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors">
               Preview
             </button>
           </div>

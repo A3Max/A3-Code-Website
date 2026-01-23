@@ -1,13 +1,15 @@
 import Navbar from '@/components/Navbar';
 import SimpleFooter from '@/components/SimpleFooter';
 import Link from 'next/link';
+import PulsingGrid from '@/components/PulsingGrid';
 
 export default function AgentPage() {
   return (
     <div className="min-h-screen bg-[#e4e4e4] flex flex-col">
+      <PulsingGrid />
       <Navbar />
       
-      <main className="pt-[72px] flex-grow">
+      <main className="pt-[72px] flex-grow relative z-10">
         <div className="max-w-7xl mx-auto px-6 max-[707px]:px-4 pt-6 max-[707px]:pt-6 pb-12">
           <div className="max-w-4xl mx-auto">
             <div className="bg-[#e4e4e4] shadow-lg border border-black/10 p-8 max-[707px]:p-6 max-[640px]:p-4 mb-8 max-[707px]:mb-6 hover:border-[#306bff]/50 transition-colors">

@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SimpleFooter from '@/components/SimpleFooter';
+import FeaturedSpecCard from '@/components/FeaturedSpecCard';
+import PulsingGrid from '@/components/PulsingGrid';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
@@ -17,7 +19,8 @@ const highlightSpecs = [
     date: '15/01/2026',
     duration: '30m',
     likes: 1,
-    comments: 0
+    comments: 0,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'Neural Network Training Pipeline for Image Classification',
@@ -26,7 +29,8 @@ const highlightSpecs = [
     date: '14/01/2026',
     duration: '45m',
     likes: 5,
-    comments: 2
+    comments: 2,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'Real-time Stock Price Forecasting with LSTM',
@@ -35,7 +39,8 @@ const highlightSpecs = [
     date: '13/01/2026',
     duration: '25m',
     likes: 3,
-    comments: 1
+    comments: 1,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'Multi-Database Integration System with ETL Pipeline',
@@ -44,7 +49,8 @@ const highlightSpecs = [
     date: '12/01/2026',
     duration: '60m',
     likes: 8,
-    comments: 4
+    comments: 4,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'Automated Literature Review and Summarization Tool',
@@ -53,7 +59,8 @@ const highlightSpecs = [
     date: '11/01/2026',
     duration: '35m',
     likes: 2,
-    comments: 0
+    comments: 0,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'Physics-based 2D Platformer Game Engine',
@@ -62,7 +69,8 @@ const highlightSpecs = [
     date: '10/01/2026',
     duration: '50m',
     likes: 12,
-    comments: 6
+    comments: 6,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'Smart Contract Generator for ERC-20 Tokens',
@@ -71,7 +79,8 @@ const highlightSpecs = [
     date: '09/01/2026',
     duration: '20m',
     likes: 7,
-    comments: 3
+    comments: 3,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'Video Processing Pipeline with Object Detection',
@@ -80,7 +89,8 @@ const highlightSpecs = [
     date: '08/01/2026',
     duration: '55m',
     likes: 4,
-    comments: 2
+    comments: 2,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'E-commerce Website with Payment Integration',
@@ -89,7 +99,8 @@ const highlightSpecs = [
     date: '07/01/2026',
     duration: '40m',
     likes: 9,
-    comments: 5
+    comments: 5,
+    videoThumbnail: '/Faces.mov'
   },
   {
     title: 'Microservices Architecture with API Gateway',
@@ -98,13 +109,29 @@ const highlightSpecs = [
     date: '06/01/2026',
     duration: '70m',
     likes: 6,
-    comments: 3
+    comments: 3,
+    videoThumbnail: '/Faces.mov'
   }
 ];
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
+  const [cardStates, setCardStates] = useState<Record<number, 'compact' | 'full'>>({});
 
+  useEffect(() => {
+    const initialStates: Record<number, 'compact' | 'full'> = {};
+    highlightSpecs.forEach((_, index) => {
+      initialStates[index] = index % 2 === 0 ? 'compact' : 'full';
+    });
+    setCardStates(initialStates);
+  }, []);
+
+  const toggleCardState = (index: number) => {
+    setCardStates(prev => ({
+      ...prev,
+      [index]: prev[index] === 'compact' ? 'full' : 'compact'
+    }));
+  };
 
   const coderTextRef = useRef<HTMLSpanElement>(null);
   const [coderFontSize, setCoderFontSize] = useState(46);
@@ -128,10 +155,11 @@ export default function Home() {
     return () => window.removeEventListener("resize", updateCoderFontSize);
   }, []);  return (
     <div className="min-h-screen bg-[#e4e4e4]">
+      <PulsingGrid />
       <Navbar />
       
-      <main className="pt-24 max-[707px]:pt-6">
-        <div className="max-w-7xl mx-auto px-6 py-20">
+      <main className="pt-24 max-[707px]:pt-6 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 pb-20">
           <div className="flex flex-col md:flex-row gap-12">
             <div className="flex-1">
               <div className="flex flex-col items-start mb-2 group">
@@ -176,7 +204,7 @@ export default function Home() {
               </div>
             </div>
               <h2 className="text-4xl lg:text-6xl font-bold text-[#1a1a1a] leading-tight mb-6">
-                <span className="text-[#306bff]">Ship Real Code.</span>
+                <span className="text-[#306bff]">Stop Prompting. Start Executing.</span>
                 <br />
                 From Specs That Actually Work.
               </h2>
@@ -211,50 +239,15 @@ export default function Home() {
                 <div className="bg-[#e4e4e4] shadow-lg border border-black/10 p-4 max-h-[600px] max-[375px]:max-h-[370px] overflow-y-auto hover:border-[#306bff]/50 transition-colors">
                   <div className="space-y-4 max-[375px]:space-y-2">
                     {highlightSpecs.map((spec, index) => (
-                      <div
+                      <FeaturedSpecCard
                         key={index}
-                        className={`bg-[#e4e4e4] shadow-md border p-4 max-[375px]:p-2 hover:border-[#306bff]/50 transition-colors relative ${
-                          index === 0 ? 'border-[#306bff]' : 'border-black/10'
-                        }`}
-                      >
-                        {index === 0 && (
-                          <div className="absolute top-2 right-2 bg-[#306bff] p-1.5 max-[375px]:p-1 shadow-lg z-10">
-                            <img src="/A3 spacedSmall.svg" alt="A3" className="h-5 w-5 max-[375px]:h-4 max-[375px]:w-4" />
-                          </div>
-                        )}
-                        <div className="flex gap-3">
-                          <div className="flex-1">
-                            <div className="flex items-start justify-between gap-3 mb-3 max-[375px]:mb-1.5">
-                              <h4 className="text-sm font-semibold text-[#1a1a1a] leading-tight">{spec.title}</h4>
-                            </div>
-                            <div className="flex items-center gap-2 mb-3 max-[375px]:mb-1.5">
-                              <span className="px-2 py-1 max-[375px]:px-1.5 max-[375px]:py-0.5 text-xs font-medium bg-[#306bff]/20 text-[#306bff]">{spec.category}</span>
-                              <span className="px-2 py-1 max-[375px]:px-1.5 max-[375px]:py-0.5 text-xs font-medium bg-black/10 text-black/70">{spec.tier}</span>
-                            </div>
-                            <div className="flex items-center gap-4 text-xs text-black/50 mb-3 max-[375px]:mb-1.5">
-                              <span>{spec.date}</span>
-                              <span>{spec.duration}</span>
-                            </div>
-                            <div className="flex items-center gap-4 mt-3 max-[375px]:mt-1.5 text-xs text-black/60">
-                              <span className="flex items-center gap-1">
-                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                  <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                                </svg>
-                                {spec.likes}
-                              </span>
-                              <span className="flex items-center gap-1">
-                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
-                                </svg>
-                                {spec.comments}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="w-24 h-24 max-[375px]:w-16 max-[375px]:h-16 bg-black/10 border border-black/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-black/30 text-xs">Thumb</span>
-                          </div>
-                        </div>
-                      </div>
+                        {...spec}
+                        index={index}
+                        isFeatured={index === 0}
+                        cardState={cardStates[index] || 'compact'}
+                        onToggleState={() => toggleCardState(index)}
+                        videoThumbnail={spec.videoThumbnail}
+                      />
                     ))}
                   </div>
                 </div>

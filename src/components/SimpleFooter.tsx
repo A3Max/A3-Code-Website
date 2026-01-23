@@ -11,7 +11,7 @@ export default function SimpleFooter({ withSidebarPadding = false }: SimpleFoote
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#e4e4e4] border-t border-black/10">
+    <footer className="bg-[#e4e4e4] border-t border-black/10 relative z-10">
       <div className="px-6 py-4 pr-12 max-[707px]:px-4 max-[707px]:py-3 max-[707px]:pr-4">
         <div className="border-t border-black/10 pt-4 max-[707px]:pt-3">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 max-[707px]:gap-2">

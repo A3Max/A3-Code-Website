@@ -61,7 +61,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#e4e4e4] border-t border-black/10">
+    <footer className="bg-[#e4e4e4] border-t border-black/10 relative z-10">
       <div className="px-6 py-8 max-[767px]:py-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-4 max-[767px]:gap-4">
           <div>
@@ -76,7 +76,7 @@ export default function Footer() {
               <span className="text-xl font-bold text-[#1a1a1a] max-[767px]:text-lg">Coder</span>
             </div>
             <p className="text-sm text-black/60 mb-4 max-[767px]:text-xs max-[767px]:mb-3">
-              Ship Real Code. From Specs That Actually Work.
+              Stop Prompting. Start Executing. From Specs That Actually Work.
             </p>
             {footerConfig.company.registrationNumber && (
               <p className="text-xs text-black/50 max-[767px]:hidden">
