@@ -1,60 +1,277 @@
-# A3Coder Website - Project Specification
+# A3Coder Website - Complete Replication Specification
 
-## Project Overview
+## Git Repository
 
-A3Coder is a Next.js-based web platform for managing and executing AI coding specifications (specs). Users can browse, create, share, and execute executable specifications designed to be run, reused, and improved over time.
+**Repository**: https://github.com/A3Max/new-website-repo
+**Branch**: main
+
+**AI Agent Instructions**:
+1. Clone the repository: `git clone https://github.com/A3Max/new-website-repo.git`
+2. Navigate to project: `cd new-website-repo`
+3. Install dependencies: `npm install`
+4. Copy environment variables: `cp .env.example .env.local`
+5. Update `.env.local` with actual values
+6. Run development server: `npm run dev`
 
 ## Technology Stack
 
-- **Node.js**: v24.13.0
+**Exact Versions**:
+- **Node.js**: v24.13.0 (required)
 - **Next.js**: 16.1.2
 - **React**: 19.2.3
+- **React DOM**: 19.2.3
 - **TypeScript**: ^5
 - **Tailwind CSS**: ^4
-- **NextAuth**: ^4.24.13 (mock implementation currently)
+- **NextAuth**: ^4.24.13
 - **ESLint**: ^9
+
+## Environment Variables
+
+Create `.env.local` from `.env.example`:
+
+```bash
+# Required
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key-here
+
+# Optional - OAuth
+GOOGLE_CLIENT_ID=your-google-client-id-here
+GOOGLE_CLIENT_SECRET=your-google-client-secret-here
+
+# Required for production
+DATABASE_URL=your-database-connection-string
+
+# Optional - LLM Providers
+OPENROUTER_API_KEY=your-openrouter-key
+TENSORIX_API_KEY=your-tensorix-key
+```
+
+## Design System
+
+### Color Palette
+
+**CSS Variables** (defined in `src/app/globals.css`):
+```css
+--background: #e4e4e4
+--foreground: #1a1a1a
+--highlight: #306bff
+```
+
+**Tailwind Color Usage**:
+- Background: `#e4e4e4` or `bg-[#e4e4e4]`
+- Text Primary: `#1a1a1a` or `text-[#1a1a1a]`
+- Accent Blue: `#306bff` or `text-[#306bff]`, `bg-[#306bff]`
+- Accent Orange: `#f97316` or `text-orange-500`, `bg-orange-500`
+- Border: `black/10` or `border-black/10`
+- Text Secondary: `black/60` to `black/80`
+
+### Typography
+
+**Font**: Urbanist (Google Fonts)
+```css
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap');
+```
+
+**Font Weights**:
+- Regular: `font-normal` (400)
+- Medium: `font-medium` (500)
+- Semibold: `font-semibold` (600)
+- Bold: `font-bold` (700)
+- Extra Bold: `font-extrabold` (800)
+
+**Font Sizes** (responsive):
+- Hero Title: `text-5xl` → `text-3xl` → `text-2xl` → `text-xl`
+- Section Title: `text-4xl` → `text-3xl` → `text-2xl`
+- Body Text: `text-xl` → `text-base` → `text-sm`
+- Small Text: `text-sm` → `text-xs`
+
+### Border Radius (Critical Design Pattern)
+
+**Rounded Corners** (default):
+- `rounded-lg` - Medium rounded corners (most common)
+  - Feature icon backgrounds
+  - Modal containers
+  - Error messages
+
+**Circular**:
+- `rounded-full` - Perfect circles
+  - Bullet points (small blue dots)
+  - Success icons
+
+**Hard Corners** (rare, specific use):
+- `rounded-none` - No border radius
+  - Tensorix logo box
+  - OpenRouter logo box
+
+**Rule**: Use `rounded-lg` as default. Only use `rounded-none` for partner logo boxes.
+
+### Spacing System
+
+**Padding**:
+- Container: `px-6` → `px-4` (mobile)
+- Cards: `p-6` → `p-4` → `p-2` (mobile)
+- Buttons: `px-5 py-2.5` → `px-4 py-2` (mobile)
+
+**Margins**:
+- Section spacing: `py-20` → `py-12` (mobile)
+- Element spacing: `mb-16` → `mb-8` (mobile)
+
+### Shadows
+
+- `shadow-sm` - Subtle elevation
+- `shadow-md` - Medium elevation
+- `shadow-lg` - High elevation (cards, modals)
+- `shadow-xl` - Very high elevation
+
+### Borders
+
+**Styles**:
+- `border` - 1px solid
+- `border-2` - 2px solid
+- `border-l-4` - Left border emphasis (4px)
+
+**Colors**:
+- `border-black/10` - Subtle border (default)
+- `border-[#306bff]` - Blue accent
+- `border-orange-500` - Orange accent
+
+### Animations
+
+**Snake Animation** (defined in `src/app/globals.css`):
+```css
+@keyframes snake {
+  0% { top: 0; left: 0; }
+  25% { top: 0; left: calc(100% - var(--snake-size)); }
+  50% { top: calc(100% - var(--snake-size)); left: calc(100% - var(--snake-size)); }
+  75% { top: calc(100% - var(--snake-size)); left: 0; }
+  100% { top: 0; left: 0; }
+}
+
+.animate-snake {
+  animation: snake 8s linear infinite;
+}
+```
+
+**CSS Variable**:
+```css
+--snake-size: 12px; /* desktop */
+--snake-size: 8px; /* mobile, max-width: 707px */
+```
+
+**Transitions**:
+- `transition-colors` - Color changes
+- `transition-transform` - Transform changes
+- `duration-300` - 300ms duration
+- `ease-in-out` - Smooth easing
+
+### Scrollbar Styling
+
+**Custom Scrollbar** (defined in `src/app/globals.css`):
+```css
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(48, 107, 255, 0.5);
+  border-radius: 6px;
+  border: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(48, 107, 255, 0.7);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(48, 107, 255, 0.5) rgba(0, 0, 0, 0.05);
+}
+```
+
+### Z-Index Hierarchy
+
+- Navbar: `z-50`
+- Page headers: `z-[45]`
+- Sticky search/filter bar: `z-40`
+- Fixed black box (gap filler): `z-[35]`
+- Spec cards: `z-30`
+- Preview modal: `z-[9999]` (via portal)
+- Mobile menu overlay: `z-40`
+- Mobile menu drawer: `z-40`
+
+## Responsive Breakpoints
+
+**Custom Breakpoints**:
+- `max-[375px]` - Extra small mobile
+- `max-[475px]` - Small mobile
+- `max-[640px]` - Mobile
+- `max-[649px]` - Small mobile (pricing)
+- `max-[707px]` - Medium mobile (snake size changes)
+- `max-[767px]` - Mobile (footer)
+- `max-[890px]` - Tablet
+- `max-[1022px]` - Tablet (community links)
+- `min-[1030px]` - Desktop
 
 ## Project Structure
 
 ```
 a3code-website/
-├── public/                          # Static assets (SVGs, images)
+├── public/
+│   ├── A3 spacedSmall.svg
+│   ├── BlackA3.svg
+│   ├── Screenshot 2026-01-21 at 11.31.08.png
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
 ├── src/
-│   ├── app/                        # Next.js App Router pages
-│   │   ├── agent/                  # AI coding agent interface (placeholder)
-│   │   ├── about/                  # About page (placeholder)
-│   │   ├── api/                    # API routes
-│   │   │   ├── auth/[...nextauth]/ # NextAuth endpoints
-│   │   │   ├── contact-sales/      # Contact form API
-│   │   │   └── newsletter/subscribe/ # Newsletter subscription
-│   │   ├── contact/                # Contact page (placeholder)
-│   │   ├── create-spec/            # Spec creation interface (placeholder)
-│   │   ├── docs/                   # Documentation (placeholder)
-│   │   ├── install/                # Installation instructions (placeholder)
-│   │   ├── install-extension/      # Extension installation (placeholder)
-│   │   ├── login/                  # Login page
-│   │   ├── my-specs/               # Personal spec collection
-│   │   ├── pricing/                # Pricing plans
-│   │   ├── signup/                 # Registration page
-│   │   ├── specs/                  # Specs registry
-│   │   ├── globals.css             # Global styles
-│   │   ├── layout.tsx              # Root layout
-│   │   └── page.tsx                # Home page
-│   ├── components/                 # Reusable components
-│   │   ├── ContactSalesModal.tsx   # Contact sales modal
-│   │   ├── Footer.tsx              # Desktop footer
-│   │   ├── MobileFilters.tsx       # Mobile filter component
-│   │   ├── MySpecCard.tsx          # Personal spec card
-│   │   ├── Navbar.tsx              # Navigation bar
-│   │   ├── Sidebar.tsx             # Sidebar with filters
-│   │   ├── SimpleFooter.tsx        # Mobile footer
-│   │   └── SpecCard.tsx            # Spec card component
+│   ├── app/
+│   │   ├── about/page.tsx
+│   │   ├── agent/page.tsx
+│   │   ├── api/
+│   │   │   ├── auth/[...nextauth]/route.ts
+│   │   │   ├── contact-sales/route.ts
+│   │   │   └── newsletter/subscribe/route.ts
+│   │   ├── contact/page.tsx
+│   │   ├── create-spec/page.tsx
+│   │   ├── docs/page.tsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── install-extension/page.tsx
+│   │   ├── install/page.tsx
+│   │   ├── layout.tsx
+│   │   ├── login/page.tsx
+│   │   ├── my-specs/page.tsx
+│   │   ├── page.tsx
+│   │   ├── page.tsx.backup
+│   │   ├── pricing/page.tsx
+│   │   ├── providers.tsx
+│   │   ├── signup/page.tsx
+│   │   ├── specs/page.tsx
+│   │   └── test.tsx
+│   ├── components/
+│   │   ├── ContactSalesModal.tsx
+│   │   ├── Footer.tsx
+│   │   ├── MobileFilters.tsx
+│   │   ├── MySpecCard.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── SimpleFooter.tsx
+│   │   └── SpecCard.tsx
 │   ├── config/
-│   │   └── footer.ts               # Footer links configuration
+│   │   └── footer.ts
 │   └── contexts/
-│       └── AuthContext.tsx         # Authentication context (mock)
+│       └── AuthContext.tsx
+├── .env.example
 ├── .gitignore
-├── A3CODE_WEBSITE_SPEC.md          # This specification
+├── A3CODE_WEBSITE_SPEC.md
+├── A3CODER_WEBSITE_SPEC.md
 ├── README.md
 ├── eslint.config.mjs
 ├── next.config.ts
@@ -63,130 +280,11 @@ a3code-website/
 └── tsconfig.json
 ```
 
-## Core Features
-
-### 1. Authentication (Mock Implementation)
-
-**Files**: `src/contexts/AuthContext.tsx`, `src/app/login/page.tsx`, `src/app/signup/page.tsx`
-
-- Login page with email/password form
-- Signup page with registration form
-- User session management via React Context
-- Conditional UI based on authentication state
-- Logout functionality
-- User avatar display with initials
-
-**AuthContext Interface**:
-```typescript
-interface AuthContextType {
-  isAuthenticated: boolean;
-  user: User | null;
-  login: (email: string, password: string) => void;
-  logout: () => void;
-  signup: (name: string, email: string, password: string) => void;
-}
-
-interface User {
-  name: string;
-  email: string;
-}
-```
-
-### 2. Specs Registry (`/specs`)
-
-**Files**: `src/app/specs/page.tsx`, `src/components/SpecCard.tsx`, `src/components/Sidebar.tsx`
-
-- Browse all available specs
-- Search functionality
-- Category filtering
-- Spec cards with preview modal
-- Responsive grid layout (2 cols logged out, 3 cols logged in)
-- Sticky search/filter bar
-- "Coder Community" sidebar (logged out only)
-- "Create Spec" button (logged in only)
-
-**SpecCard Props**:
-```typescript
-interface SpecCardProps {
-  title: string;
-  category: string;
-  tier: string;
-  date: string;
-  duration: string;
-  likes: number;
-  comments: number;
-}
-```
-
-### 3. My Specs (`/my-specs`)
-
-**Files**: `src/app/my-specs/page.tsx`, `src/components/MySpecCard.tsx`
-
-- Personal spec collection
-- Search and filter functionality
-- Spec cards with preview modal
-- 3-column grid layout
-- Sticky search/filter bar
-- Title truncation (line-clamp-3)
-
-### 4. Pricing (`/pricing`)
-
-**Files**: `src/app/pricing/page.tsx`, `src/components/ContactSalesModal.tsx`
-
-- Three pricing tiers: Free, Pro ($20/mo), Elite ($50/mo)
-- Responsive layouts:
-  - Desktop (≥1030px): 3-column card layout
-  - Medium mobile (768px-649px): Compact comparison table
-  - Small mobile (≤649px): Tabbed card layout
-- Feature comparison
-- Contact sales modal
-
-**Plan Details**:
-
-**Free (Hobbyist)**:
-- Access to community specs registry
-- A3Code AI Agent VS Code extension
-- Download specs
-- View spec definitions
-- View community comments
-- Search and filter specs
-- Execute community specs in VS Code desktop
-
-**Pro ($20/month)**:
-- All Free features
-- Create your own specs
-- AI-powered spec creation and review
-- Create private specs
-- Edit your specs
-- Share specs with community
-- Run specs created by professionals
-- Shared specs eligible for ranking
-- Execute professional specs in VS Code desktop
-
-**Elite ($50/month)**:
-- All Pro features
-- Dedicated cloud CPU, memory, and storage
-- Run your own A3Code AI Agent in the cloud
-- LLM provider key management
-- Run A3Code AI Agent in separate browser tab
-- Download code & artifacts generated by AI Agent
-- Host and share dashboards created by AI Agent
-- Execute any spec instantly in A3Code VS Code cloud
-
-### 5. Other Pages (Placeholders)
-
-- `/agent` - AI coding agent interface
-- `/about` - About page
-- `/contact` - Contact page
-- `/create-spec` - Spec creation interface
-- `/docs` - Documentation
-- `/install` - Installation instructions
-- `/install-extension` - Extension installation
-
-## Component Library
+## Component Specifications
 
 ### Navbar (`src/components/Navbar.tsx`)
 
+**Features**:
 - Fixed positioning at top
 - Responsive design (desktop/mobile drawer)
 - Authentication-aware (shows user info or login/signup)
@@ -197,6 +295,11 @@ interface SpecCardProps {
 **Responsive Breakpoints**:
 - Desktop: ≥1030px
 - Mobile: <1030px
+
+**Design**:
+- Background: `bg-[#e4e4e4]`
+- Border: `border-b border-black/10`
+- Logo: BlackA3.svg or A3 spacedSmall.svg
 
 ### SpecCard (`src/components/SpecCard.tsx`)
 
@@ -213,6 +316,7 @@ interface SpecCardProps {
 }
 ```
 
+**Features**:
 - Displays spec information
 - Thumbnail preview
 - Category and tier badges
@@ -222,27 +326,41 @@ interface SpecCardProps {
 - Hover effects with orange cube animation
 - Uses `createPortal` for preview modal (z-index fix)
 
+**Design**:
+- Background: `bg-[#e4e4e4]`
+- Border: `border border-black/10`
+- Shadow: `shadow-lg`
+- Hover: `hover:border-[#306bff]/50`
+- Border Radius: `rounded-lg`
+
 ### MySpecCard (`src/components/MySpecCard.tsx`)
 
-- Same props as SpecCard
-- Similar functionality but for personal specs
-- Title truncation (line-clamp-3)
+**Props**: Same as SpecCard
+
+**Features**:
+- Similar to SpecCard but for personal specs
+- Title truncation: `line-clamp-3`
+- Same preview modal functionality
 
 ### Footer (`src/components/Footer.tsx`)
 
+**Features**:
 - Desktop footer with multiple columns
 - Links organized by category
 - Social media links
 - Copyright information
-- Hidden on mobile (<768px)
+
+**Responsive**: Hidden on mobile (<768px)
 
 ### SimpleFooter (`src/components/SimpleFooter.tsx`)
 
+**Features**:
 - Simplified footer for mobile
 - Essential links only
 - Social media links
 - Copyright information
-- Visible only on mobile (<768px)
+
+**Responsive**: Visible only on mobile (<768px)
 
 ### ContactSalesModal (`src/components/ContactSalesModal.tsx`)
 
@@ -254,13 +372,22 @@ interface ContactSalesModalProps {
 }
 ```
 
+**Features**:
 - Modal for contacting sales team
 - Form with name, email, company, message fields
 - Close button
 - Click outside to close
+- Success and error states
+
+**Design**:
+- Overlay: `bg-black/80 backdrop-blur-sm`
+- Container: `bg-white border border-black/10 rounded-lg`
+- Success Icon: `bg-green-500/20 rounded-full`
+- Error Message: `bg-red-500/10 border border-red-500/30 rounded`
 
 ### MobileFilters (`src/components/MobileFilters.tsx`)
 
+**Features**:
 - Mobile-friendly filter component
 - Category selection
 - Search functionality
@@ -268,129 +395,138 @@ interface ContactSalesModalProps {
 
 ### Sidebar (`src/components/Sidebar.tsx`)
 
+**Features**:
 - Category filters
 - Search functionality
 - "Coder Community" card
 - Social media links
 - Visible on Specs Registry (logged out only)
 
-## Styling System
+**Design**:
+- Bullet points: `w-1.5 h-1.5 bg-[#306bff] rounded-full`
 
-### Color Palette
+## Page Specifications
 
-- Background: `#e4e4e4` (light gray)
-- Text Primary: `#1a1a1a` (dark gray)
-- Text Secondary: `black/60` to `black/80`
-- Accent Blue: `#306bff`
-- Accent Orange: `#f97316`
-- Border: `black/10`
+### Home Page (`src/app/page.tsx`)
 
-### Typography
+**Sections**:
+1. Hero section with title and description
+2. Feature cards (6 cards) with icons
+3. Community links (Tensorix, OpenRouter)
 
-**Font**: Geist (Next.js default)
+**Feature Card Design**:
+```tsx
+<div className="bg-[#e4e4e4] border-l-4 border-l-[#306bff] border border-black/10 p-6 hover:border-[#306bff]/50 transition-colors shadow-lg">
+  <div className="flex items-start gap-4">
+    <div className="flex-shrink-0 w-10 h-10 bg-[#306bff]/20 rounded-lg flex items-center justify-center">
+      {/* Icon */}
+    </div>
+    <div>
+      <h3 className="text-xl font-semibold text-[#1a1a1a]">Title</h3>
+      <p className="text-base text-black/70">Description</p>
+      <div className="flex items-center gap-2">
+        <div className="w-1.5 h-1.5 bg-[#306bff] rounded-full" />
+        <span className="text-xs text-[#306bff] font-medium">Production-oriented defaults</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
 
-**Sizes**:
-- Hero Title: `text-5xl` → `text-3xl` → `text-2xl` → `text-xl` (responsive)
-- Section Title: `text-4xl` → `text-3xl` → `text-2xl` (responsive)
-- Body Text: `text-xl` → `text-base` → `text-sm` (responsive)
-- Small Text: `text-sm` → `text-xs` (responsive)
+**Partner Logo Design** (Hard Corners):
+```tsx
+<div className="flex-shrink-0 w-12 h-12 bg-[#306bff] rounded-none flex items-center justify-center">
+  <span className="text-white font-bold text-sm">TX</span>
+</div>
+```
 
-### Spacing
+### Specs Registry (`src/app/specs/page.tsx`)
 
-- Container: `px-6` → `px-4` (mobile)
-- Cards: `p-6` → `p-4` → `p-2` (mobile)
-- Buttons: `px-5 py-2.5` → `px-4 py-2` (mobile)
-- Section spacing: `py-20` → `py-12` (mobile)
+**Features**:
+- Browse all available specs
+- Search functionality
+- Category filtering
+- Spec cards with preview modal
+- Responsive grid layout (2 cols logged out, 3 cols logged in)
+- Sticky search/filter bar
+- "Coder Community" sidebar (logged out only)
+- "Create Spec" button (logged in only)
 
-### Shadows
+### My Specs (`src/app/my-specs/page.tsx`)
 
-- `shadow-sm`: Subtle elevation
-- `shadow-md`: Medium elevation
-- `shadow-lg`: High elevation (cards, modals)
-- `shadow-xl`: Very high elevation
+**Features**:
+- Personal spec collection
+- Search and filter functionality
+- Spec cards with preview modal
+- 3-column grid layout
+- Sticky search/filter bar
+- Title truncation (line-clamp-3)
 
-### Z-Index Hierarchy
+### Pricing (`src/app/pricing/page.tsx`)
 
-- Navbar: z-50
-- Page headers: z-[45]
-- Sticky search/filter bar: z-40
-- Fixed black box (gap filler): z-[35]
-- Spec cards: z-30
-- Preview modal: z-[9999] (via portal)
-- Mobile menu overlay: z-40
-- Mobile menu drawer: z-40
+**Features**:
+- Three pricing tiers: Free, Pro ($20/mo), Elite ($50/mo)
+- Responsive layouts:
+  - Desktop (≥1030px): 3-column card layout
+  - Medium mobile (768px-649px): Compact comparison table
+  - Small mobile (≤649px): Tabbed card layout
+- Feature comparison
+- Contact sales modal
 
-## Responsive Design
+### Other Pages (Placeholders)
 
-### Breakpoints
+- `/agent` - AI coding agent interface
+- `/about` - About page
+- `/contact` - Contact page
+- `/create-spec` - Spec creation interface
+- `/docs` - Documentation
+- `/install` - Installation instructions
+- `/install-extension` - Extension installation
 
-- `max-[375px]`: Extra small mobile
-- `max-[475px]`: Small mobile
-- `max-[640px]`: Mobile
-- `max-[649px]`: Small mobile (pricing)
-- `max-[707px]`: Medium mobile
-- `max-[767px]`: Mobile (footer)
-- `max-[890px]`: Tablet
-- `max-[1022px]`: Tablet (community links)
-- `min-[1030px]`: Desktop
+## Authentication
 
-### Layout Strategies
+**Current Implementation**: Mock authentication using React Context
 
-**Desktop (≥1030px)**:
-- Full navigation bar
-- 3-column grid for specs
-- Full footer
-- Side-by-side layouts
+**File**: `src/contexts/AuthContext.tsx`
 
-**Tablet (768px-1029px)**:
-- Compact navigation
-- 2-column grid for specs
-- Simplified footer
+**Interface**:
+```typescript
+interface AuthContextType {
+  isAuthenticated: boolean;
+  user: User | null;
+  login: (email: string, password: string) => void;
+  logout: () => void;
+  signup: (name: string, email: string, password: string) => void;
+}
 
-**Mobile (<768px)**:
-- Hamburger menu
-- Single column layouts
-- Simple footer
-- Tabbed pricing (≤649px)
-- Comparison table (768px-649px)
+interface User {
+  name: string;
+  email: string;
+}
+```
+
+**Usage**:
+```typescript
+const { isAuthenticated, user, login, logout, signup } = useAuth();
+```
 
 ## API Routes
 
 ### Current API Routes
 
-**Authentication** (`/api/auth/[...nextauth]`):
+**Authentication** (`/api/auth/[...nextauth]/route.ts`):
 - NextAuth configuration
 - Currently using mock implementation
 
-**Contact Sales** (`/api/contact-sales`):
+**Contact Sales** (`/api/contact-sales/route.ts`):
 - POST endpoint for contact form
 - Validates and processes contact requests
 
-**Newsletter** (`/api/newsletter/subscribe`):
+**Newsletter** (`/api/newsletter/subscribe/route.ts`):
 - POST endpoint for newsletter subscription
 - Email validation and subscription
 
-### Future API Routes
-
-**Specs**:
-- `GET /api/specs`: List all specs
-- `GET /api/specs/:id`: Get spec details
-- `POST /api/specs`: Create new spec
-- `PUT /api/specs/:id`: Update spec
-- `DELETE /api/specs/:id`: Delete spec
-
-**User**:
-- `GET /api/user`: Get user profile
-- `PUT /api/user`: Update user profile
-- `GET /api/user/specs`: Get user's specs
-
-**Execution**:
-- `POST /api/execute`: Execute spec
-- `GET /api/execute/:id`: Get execution status
-
-## Development
-
-### Scripts
+## Development Scripts
 
 ```bash
 npm run dev      # Start development server
@@ -399,69 +535,43 @@ npm start        # Start production server
 npm run lint     # Run ESLint
 ```
 
-### Environment Variables
+## Critical Design Rules
 
-**Required**:
-```
-NEXTAUTH_SECRET=your-secret-key
-NEXTAUTH_URL=https://your-domain.com
-DATABASE_URL=your-database-connection-string
-```
+1. **Border Radius**: Use `rounded-lg` as default. Only use `rounded-none` for partner logo boxes (Tensorix, OpenRouter).
 
-**Optional**:
-```
-OPENROUTER_API_KEY=your-openrouter-key
-TENSORIX_API_KEY=your-tensorix-key
-```
+2. **Colors**: Always use exact hex codes:
+   - Background: `#e4e4e4`
+   - Text: `#1a1a1a`
+   - Accent Blue: `#306bff`
+   - Accent Orange: `#f97316`
+
+3. **Font**: Always use Urbanist font family.
+
+4. **Snake Animation**: Use `animate-snake` class with `--snake-size` CSS variable.
+
+5. **Scrollbar**: Custom scrollbar styling is defined in globals.css.
+
+6. **Z-Index**: Follow the z-index hierarchy strictly.
+
+7. **Responsive**: Use the custom breakpoints defined above.
+
+8. **Transitions**: Use `transition-colors duration-300 ease-in-out` for color changes.
+
+9. **Shadows**: Use `shadow-lg` for cards and modals.
+
+10. **Borders**: Use `border-black/10` for subtle borders.
 
 ## Deployment
 
 ### Recommended Platform: Vercel
-
-- Native Next.js support
-- Automatic deployments
-- Edge functions
-- CDN
-- Preview deployments
-
-### Deployment Steps
 
 1. Push code to GitHub
 2. Connect repository to Vercel
 3. Configure environment variables
 4. Deploy automatically on push
 
-## Git Repository
-
-**Repository**: https://github.com/A3Max/A3-Code-Website
-
-## Future Roadmap
-
-### High Priority
-
-1. Real Authentication with NextAuth
-2. Spec Creation interface
-3. Agent Implementation
-4. Database Integration
-
-### Medium Priority
-
-1. User Profiles
-2. Spec Versioning
-3. Comments and Discussions
-4. Rating System
-5. Search Enhancement
-
-### Low Priority
-
-1. Theme Toggle
-2. Admin Dashboard
-3. Export/Import
-4. Analytics
-5. Mobile App
-
 ---
 
 **Last Updated**: January 23, 2026
-**Version**: 3.0.0
-**Repository**: https://github.com/A3Max/A3-Code-Website
+**Version**: 4.0.0
+**Repository**: https://github.com/A3Max/new-website-repo
