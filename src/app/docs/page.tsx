@@ -2,22 +2,22 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SimpleFooter from '@/components/SimpleFooter';
 
-export default function InstallPage() {
+export default function DocsPage() {
   return (
     <div className="min-h-screen bg-[#e4e4e4]">
       <Navbar />
       
       <main className="pt-24">
         <div className="max-w-4xl mx-auto px-6 py-12">
-          <h1 className="text-5xl font-bold text-[#1a1a1a] mb-6">Install A3Coder</h1>
+          <h1 className="text-5xl font-bold text-[#1a1a1a] mb-6">Documentation</h1>
           <p className="text-xl text-black/70 mb-12">
-            Get started with A3Coder and start building with spec-driven development.
+            Learn how to use A3Coder to build with spec-driven development.
           </p>
 
           <div className="bg-[#e4e4e4] shadow-lg border border-black/10 p-8 mb-8">
             <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">Getting Started</h2>
             <p className="text-black/70">
-              Choose your installation method to get started with A3Coder.
+              Welcome to the A3Coder documentation. Here you'll find everything you need to get started with spec-driven development.
             </p>
           </div>
         </div>

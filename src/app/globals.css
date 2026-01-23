@@ -5,6 +5,13 @@
   --background: #e4e4e4;
   --foreground: #1a1a1a;
   --highlight: #306bff;
+  --snake-size: 12px;
+}
+
+@media (max-width: 707px) {
+  :root {
+    --snake-size: 8px;
+  }
 }
 
 @theme inline {
@@ -37,14 +44,14 @@ a {
   }
   25% {
     top: 0;
-    left: calc(100% - 12px);
+    left: calc(100% - var(--snake-size));
   }
   50% {
-    top: calc(100% - 12px);
-    left: calc(100% - 12px);
+    top: calc(100% - var(--snake-size));
+    left: calc(100% - var(--snake-size));
   }
   75% {
-    top: calc(100% - 12px);
+    top: calc(100% - var(--snake-size));
     left: 0;
   }
   100% {

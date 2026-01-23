@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import SimpleFooter from '@/components/SimpleFooter';
 import Link from 'next/link';
 import MySpecCard from '@/components/MySpecCard';
+import MobileFilters from '@/components/MobileFilters';
 import Sidebar from '@/components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -318,6 +319,8 @@ export default function MySpecsPage() {
   const specsGridRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
 
+  console.log('MySpecsPage rendered, isAuthenticated:', isAuthenticated);
+
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -351,10 +354,10 @@ export default function MySpecsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#e4e4e4]">
+    <div className="h-screen flex flex-col bg-[#e4e4e4]">
       <Navbar />
       
-      <main className="pb-32">
+      <main className="flex-1 overflow-y-auto pb-32 max-[707px]:overflow-visible">
         <Sidebar 
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -362,21 +365,28 @@ export default function MySpecsPage() {
           toggleCategory={toggleCategory}
           categories={categories}
           isAuthenticated={isAuthenticated}
-          showCommunityCard={false}
+          showCommunityCard={true}
         />
         
-        <div className="pl-[280px]">
-          <div className="sticky top-[72px] z-[45] bg-[#e4e4e4] pt-12">
-            <div className="px-6 pb-4">
-              <h1 className="text-4xl font-bold text-[#1a1a1a] mb-4">My Specs</h1>
-              <p className="text-lg text-black/70">
+        <div className="pl-[280px] max-[707px]:pl-0">
+          <div className="sticky top-[72px] z-30 bg-[#e4e4e4] pt-12 max-[707px]:pt-6 overflow-visible">
+            <div className="px-6 pb-4 max-[707px]:px-4 max-[707px]:pb-6 overflow-visible">
+              <h1 className="text-4xl font-bold text-[#1a1a1a] mb-4 max-[707px]:text-3xl max-[640px]:text-2xl max-[375px]:text-xl">My Specs</h1>
+              <p className="text-lg text-black/70 max-[707px]:text-base max-[375px]:text-sm max-[707px]:mb-4">
                 Your personal collection of designed and remixed specifications.
               </p>
+              <MobileFilters
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                selectedCategories={selectedCategories}
+                toggleCategory={toggleCategory}
+                categories={categories}
+              />
             </div>
           </div>
 
-          <div className="px-6 pt-20 pb-12">
-            <div ref={specsGridRef} className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(380px,1fr))]">
+          <div className="px-6 pt-20 pb-12 max-[707px]:px-4 z-20">
+            <div ref={specsGridRef} className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(380px,1fr))] max-[707px]:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] max-[640px]:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] max-[375px]:grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
               {filteredSpecs.map((spec, index) => (
                 <MySpecCard
                   key={spec.id}
@@ -401,7 +411,7 @@ export default function MySpecsPage() {
           </div>
         </div>
       </main>
-      <div className="pl-[280px]">
+      <div className="pl-[280px] max-[707px]:pl-0">
         <SimpleFooter />
       </div>
     </div>

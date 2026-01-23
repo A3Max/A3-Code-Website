@@ -4,12 +4,12 @@ import Link from 'next/link';
 
 export default function AgentPage() {
   return (
-    <div className="min-h-screen bg-[#e4e4e4]">
+    <div className="min-h-screen bg-[#e4e4e4] flex flex-col">
       <Navbar />
       
-      <main className="pt-24">
+      <main className="pt-24 flex-grow">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="max-w-4xl">
+          <div className="max-w-4xl mx-auto">
             <div className="bg-[#e4e4e4] shadow-lg border border-black/10 p-8 mb-8 hover:border-[#306bff]/50 transition-colors">
               <h2 className="text-3xl font-bold text-[#1a1a1a] mb-6">
                 Experience A3Coder AI Agent in the Cloud
@@ -54,7 +54,7 @@ export default function AgentPage() {
           </div>
         </div>
       </main>
-      <div className="pt-16">
+      <div className="mt-auto pt-16">
         <SimpleFooter />
       </div>
     </div>

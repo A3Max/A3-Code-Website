@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode } from 'react';
+import { signIn } from 'next-auth/react';
 
 interface User {
   name: string;
@@ -12,6 +13,7 @@ interface AuthContextType {
   user: User | null;
   login: (user: User) => void;
   logout: () => void;
+  signInWithGoogle: () => Promise<void>;
   isAuthenticated: boolean;
 }
 
@@ -28,8 +30,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  const signInWithGoogle = async () => {
+    try {
+      await signIn('google', { callbackUrl: '/' });
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
+    <AuthContext.Provider value={{ user, login, logout, signInWithGoogle, isAuthenticated: !!user }}>
       {children}
     </AuthContext.Provider>
   );

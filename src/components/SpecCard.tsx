@@ -256,12 +256,12 @@ export default function SpecCard({ id, title, category, tier, date, duration, li
   
   return (
     <div
-      className="group bg-[#e4e4e4] shadow-lg border border-black/10 hover:border-[#306bff]/50 transition-colors overflow-hidden relative p-3"
+      className="group bg-[#e4e4e4] shadow-lg border border-black/10 hover:border-[#306bff]/50 transition-colors relative p-3 max-[707px]:p-2"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       <div
-        className="absolute w-3 h-3 bg-orange-500 animate-snake group-hover:bg-[#306bff] transition-all duration-300"
+        className="absolute right-0 bottom-0 w-3 h-3 max-[707px]:w-2 max-[707px]:h-2 bg-orange-500 animate-snake group-hover:bg-[#306bff] transition-all duration-300"
         style={{
           animationDelay: `-${(index % 4)}s`,
           opacity: isDimmed ? 0.2 : 1
@@ -269,9 +269,9 @@ export default function SpecCard({ id, title, category, tier, date, duration, li
       />
       <div className="flex">
         {thumbnail && (
-          <div className="w-40 flex-shrink-0">
-            <div className="w-40 h-40 overflow-hidden">
-              <img src="/Screenshot 2026-01-21 at 11.31.08.png" alt="Spec thumbnail" className="w-full h-full object-cover" />
+          <div className="w-40 flex-shrink-0 max-[707px]:w-24">
+            <div className="w-40 h-40 overflow-hidden max-[707px]:w-24 max-[707px]:h-24">
+              <img src="/Screenshot 2026-01-21 at 11.31.08.png" alt="Spec thumbnail" className="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setShowImagePreview(true)} />
             </div>
             <button onClick={() => setShowImagePreview(true)} className="w-full mt-2 px-2 py-1 text-xs font-medium bg-orange-500 text-white hover:bg-orange-600 transition-colors">
               Preview
@@ -289,38 +289,38 @@ export default function SpecCard({ id, title, category, tier, date, duration, li
               </svg>
             </button>
           )}
-          <h4 className={`text-sm font-semibold text-[#1a1a1a] leading-tight mb-3 line-clamp-4 overflow-hidden max-h-[4.5rem] w-full ${isOwner ? 'pr-8' : ''}`}>{title}</h4>
+          <h4 className={`text-sm font-semibold text-[#1a1a1a] leading-tight mb-3 line-clamp-3 overflow-hidden max-h-[3.3rem] w-full max-[707px]:text-[11px] max-[707px]:max-h-[2.6rem] max-[707px]:mb-2 ${isOwner ? 'pr-8' : ''}`}>{title}</h4>
           <div className="flex-grow" />
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-1 text-xs font-medium bg-[#306bff]/20 text-[#306bff]">{category}</span>
-            <span className="px-2 py-1 text-xs font-medium bg-black/10 text-black/70">{tier}</span>
+            <span className="px-2 py-1 text-xs font-medium bg-[#306bff]/20 text-[#306bff] max-[707px]:text-[9px]">{category}</span>
+            <span className="px-2 py-1 text-xs font-medium bg-black/10 text-black/70 max-[707px]:text-[9px]">{tier}</span>
           </div>
-          <div className="flex items-center gap-4 text-xs text-black/50 mb-3">
+          <div className="flex items-center gap-4 text-xs text-black/50 mb-3 max-[707px]:text-[10px]">
             <span>{date}</span>
             <span>{duration}</span>
           </div>
-          <div className="flex items-center justify-between text-xs text-black/60 mt-auto">
+          <div className="flex items-center justify-between text-xs text-black/60 mt-auto max-[707px]:text-[10px]">
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 max-[707px]:w-3 max-[707px]:h-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
                 </svg>
                 {likes}
               </span>
               <span className="flex items-center gap-1">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 max-[707px]:w-3 max-[707px]:h-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                 </svg>
                 {comments}
               </span>
               <button onClick={() => setShowPreview(true)} className="flex items-center gap-1 text-black/60 hover:text-black transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 max-[707px]:w-3 max-[707px]:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </button>
             </div>
-            <button className="px-4 py-1 text-xs font-medium bg-[#306bff]/20 text-[#306bff] hover:bg-[#306bff]/30 transition-colors whitespace-nowrap">
+            <button className="px-4 py-1 text-xs font-medium bg-[#306bff]/20 text-[#306bff] hover:bg-[#306bff]/30 transition-colors whitespace-nowrap max-[707px]:px-3 max-[707px]:py-0.5">
               Run Spec
             </button>
           </div>

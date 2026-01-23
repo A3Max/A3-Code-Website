@@ -22,16 +22,14 @@ export default function Sidebar({
   showCommunityCard = true
 }: SidebarProps) {
   return (
-    <div className="w-[280px] flex-shrink-0 fixed top-[72px] left-0 h-[calc(100vh-72px)] flex flex-col px-6 border-r border-black/10 z-40">
+    <div className="w-[280px] flex-shrink-0 fixed top-[72px] left-0 h-[calc(100vh-72px)] flex flex-col px-6 border-r border-black/10 z-40 max-[707px]:hidden">
       <div className="h-[48px]"></div>
-      {isAuthenticated && (
-        <Link 
-          href="/create-spec"
-          className="block w-full px-6 py-3 text-center font-bold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors mb-6 h-[52px] flex items-center justify-center shadow-lg"
-        >
-          Create Spec
-        </Link>
-      )}
+      <Link 
+        href={isAuthenticated ? "/create-spec" : "/login"}
+        className="block w-full px-6 py-3 text-center font-bold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors mb-6 h-[52px] flex items-center justify-center shadow-lg"
+      >
+        {isAuthenticated ? "Create Spec" : "Log In to Create Spec"}
+      </Link>
       
       <input
         type="text"
@@ -42,20 +40,23 @@ export default function Sidebar({
       />
       
       <h3 className="text-sm font-semibold text-[#1a1a1a] mb-4">FILTER BY CATEGORY</h3>
-      <div className="overflow-y-auto flex flex-col gap-2 px-2" style={{ maxHeight: showCommunityCard ? 'calc(100vh - 700px)' : 'calc(100vh - 550px)' }}>
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => toggleCategory(category)}
-            className={`w-full px-4 py-2 text-sm font-medium transition-colors text-left ${
-              (category === 'All' && selectedCategories.length === 0) || selectedCategories.includes(category)
-                ? 'bg-[#306bff] text-white shadow-lg'
-                : 'bg-[#e4e4e4] shadow-lg text-[#1a1a1a] hover:border-[#306bff]/50 border border-black/10'
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+      <div className="relative" style={{ maxHeight: isAuthenticated ? '780px' : '415px' }}>
+        <div className="overflow-y-auto flex flex-col gap-2 px-2 pb-[50px] h-full">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => toggleCategory(category)}
+              className={`w-full px-4 py-2 text-sm font-medium transition-colors text-left ${
+                (category === 'All' && selectedCategories.length === 0) || selectedCategories.includes(category)
+                  ? 'bg-[#306bff] text-white shadow-lg'
+                  : 'bg-[#e4e4e4] shadow-lg text-[#1a1a1a] hover:border-[#306bff]/50 border border-black/10'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-[50px] pointer-events-none" style={{ background: 'linear-gradient(to top, #e4e4e4 0%, rgba(228, 228, 228, 0) 100%)' }}></div>
       </div>
       {!isAuthenticated && showCommunityCard && (
         <div className="mt-4 mb-4 bg-[#e4e4e4] border border-black/10 p-4 shadow-lg">
