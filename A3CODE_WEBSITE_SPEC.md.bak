@@ -1,39 +1,5 @@
 # A3Coder Website - Complete Replication Specification
 
-## ⚠️ CRITICAL PREREQUISITES
-
-### Node.js Version Requirement
-
-**REQUIRED**: Node.js >= 20.9.0 (Recommended: v24.13.0)
-
-**Before starting, verify your Node.js version**:
-```bash
-node --version
-```
-
-If your version is lower than 20.9.0, you MUST upgrade before proceeding.
-
-**Installation Instructions**:
-
-Using nvm (macOS/Linux):
-```bash
-nvm install 24.13.0
-nvm use 24.13.0
-nvm alias default 24.13.0
-```
-
-Using nvm-windows (Windows):
-```bash
-nvm install 24.13.0
-nvm use 24.13.0
-```
-
-Manual installation: https://nodejs.org/
-
-**Note**: The project includes an automatic version check. If you try to run `npm run dev` with an incorrect Node.js version, it will fail with a clear error message.
-
----
-
 ## Git Repository
 
 **Repository**: https://github.com/A3Max/new-website-repo

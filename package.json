@@ -2,9 +2,12 @@
   "name": "a3code-website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node check-node-version.js && next dev",
+    "build": "node check-node-version.js && next build",
     "start": "next start",
     "lint": "eslint"
   },
