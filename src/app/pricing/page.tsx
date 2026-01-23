@@ -393,7 +393,7 @@ export default function PricingPage() {
                 className={`flex-1 py-2 px-3 text-sm font-semibold transition-colors shadow-lg ${
                   selectedPlan === 'pro'
                     ? 'bg-[#306bff] text-white'
-                    : 'bg-[#e4e4e4] text-[#1a1a1a] border border-black/10'
+                    : 'bg-[#e4e4e4] text-[#1a1a1a] border border-[#306bff]'
                 }`}
               >
                 Pro
@@ -403,7 +403,7 @@ export default function PricingPage() {
                 className={`flex-1 py-2 px-3 text-sm font-semibold transition-colors shadow-lg ${
                   selectedPlan === 'elite'
                     ? 'bg-orange-500 text-white'
-                    : 'bg-[#e4e4e4] text-[#1a1a1a] border border-black/10'
+                    : 'bg-[#e4e4e4] text-[#1a1a1a] border border-orange-500'
                 }`}
               >
                 Elite
