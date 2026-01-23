@@ -4,10 +4,10 @@ import SimpleFooter from '@/components/SimpleFooter';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#e4e4e4]">
+    <div className="min-h-screen bg-[#e4e4e4] flex flex-col">
       <Navbar />
       
-      <main className="pt-24">
+      <main className="pt-24 flex-grow">
         <div className="max-w-4xl mx-auto px-6 max-[707px]:px-4 py-12">
           <h1 className="text-5xl max-[707px]:text-4xl max-[640px]:text-3xl max-[375px]:text-2xl font-bold text-[#1a1a1a] mb-6">About A3Coder</h1>
           <p className="text-xl max-[707px]:text-lg max-[375px]:text-base text-black/70 mb-12">
@@ -22,10 +22,10 @@ export default function AboutPage() {
           </div>
         </div>
       </main>
-      <div className="max-[767px]:hidden">
+      <div className="mt-auto pt-16 max-[767px]:hidden">
         <Footer />
       </div>
-      <div className="hidden max-[767px]:block">
+      <div className="mt-auto pt-16 hidden max-[767px]:block">
         <SimpleFooter />
       </div>
     </div>
