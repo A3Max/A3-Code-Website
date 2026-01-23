@@ -19,17 +19,17 @@ export default function AgentPage() {
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-[707px]:gap-4 mb-8 max-[707px]:mb-6">
-                <div className="bg-[#e4e4e4] border-l-4 border-l-[#306bff] shadow-lg border border-black/10 p-6 max-[707px]:p-4 max-[640px]:p-3 hover:border-[#306bff]/50 transition-colors">
-                  <h3 className="text-2xl max-[707px]:text-xl max-[640px]:text-lg font-bold text-[#306bff] mb-2">10Gi</h3>
-                  <p className="text-black/70">Storage</p>
+                <div className="bg-[#e4e4e4] border-l-4 border-l-[#306bff] shadow-lg border border-black/10 p-4 max-[707px]:p-3 hover:border-[#306bff]/50 transition-colors">
+                  <h3 className="text-xl max-[707px]:text-lg font-bold text-[#306bff] mb-1">10Gi</h3>
+                  <p className="text-black/70 text-sm">Storage</p>
                 </div>
-                <div className="bg-[#e4e4e4] border-l-4 border-l-[#306bff] shadow-lg border border-black/10 p-6 max-[707px]:p-4 max-[640px]:p-3 hover:border-[#306bff]/50 transition-colors">
-                  <h3 className="text-2xl max-[707px]:text-xl max-[640px]:text-lg font-bold text-[#306bff] mb-2">Dedicated</h3>
-                  <p className="text-black/70">Resources</p>
+                <div className="bg-[#e4e4e4] border-l-4 border-l-[#306bff] shadow-lg border border-black/10 p-4 max-[707px]:p-3 hover:border-[#306bff]/50 transition-colors">
+                  <h3 className="text-xl max-[707px]:text-lg font-bold text-[#306bff] mb-1">Dedicated</h3>
+                  <p className="text-black/70 text-sm">Resources</p>
                 </div>
-                <div className="bg-[#e4e4e4] border-l-4 border-l-[#306bff] shadow-lg border border-black/10 p-6 max-[707px]:p-4 max-[640px]:p-3 hover:border-[#306bff]/50 transition-colors">
-                  <h3 className="text-2xl max-[707px]:text-xl max-[640px]:text-lg font-bold text-[#306bff] mb-2">Instant</h3>
-                  <p className="text-black/70">Execution</p>
+                <div className="bg-[#e4e4e4] border-l-4 border-l-[#306bff] shadow-lg border border-black/10 p-4 max-[707px]:p-3 hover:border-[#306bff]/50 transition-colors">
+                  <h3 className="text-xl max-[707px]:text-lg font-bold text-[#306bff] mb-1">Instant</h3>
+                  <p className="text-black/70 text-sm">Execution</p>
                 </div>
               </div>
 
