@@ -324,7 +324,7 @@ a3code-website/
 - Authentication-aware (shows user info or login/signup)
 - Links to all main pages
 - "Install Extension" button
-- Mobile menu with hamburger icon
+- Mobile menu with hamburger icon (w-9 h-9, stroke-width 1)
 
 **Responsive Breakpoints**:
 - Desktop: ≥1030px
@@ -334,6 +334,7 @@ a3code-website/
 - Background: `bg-[#e4e4e4]`
 - Border: `border-b border-black/10`
 - Logo: BlackA3.svg or A3 spacedSmall.svg
+- Hamburger menu: `w-9 h-9` with `strokeWidth={1}`
 
 ### SpecCard (`src/components/SpecCard.tsx`)
 
@@ -510,12 +511,16 @@ interface ContactSalesModalProps {
 ### Other Pages (Placeholders)
 
 - `/agent` - AI coding agent interface
-- `/about` - About page
+- `/about` - About page (flex layout with footer positioning)
 - `/contact` - Contact page
 - `/create-spec` - Spec creation interface
-- `/docs` - Documentation
+- `/docs` - Documentation (flex layout with footer positioning)
 - `/install` - Installation instructions
 - `/install-extension` - Extension installation
+
+**Footer Positioning**:
+- Docs and About pages use `flex flex-col` layout with `flex-grow` on main and `mt-auto pt-16` on footer
+- This ensures footer stays at bottom of page even with minimal content
 
 ## Authentication
 
