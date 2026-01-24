@@ -199,7 +199,7 @@ export default function Navbar() {
 
     {/* Mobile Menu Overlay */}
     <div 
-      className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 min-[1030px]:hidden ${
+      className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 min-[1030px]:hidden ${
         isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       onClick={() => setIsMobileMenuOpen(false)}
@@ -207,7 +207,7 @@ export default function Navbar() {
 
     {/* Mobile Menu Drawer */}
     <div 
-      className={`fixed inset-y-0 right-0 z-40 w-[280px] bg-[#e4e4e4] border-l border-black/10 transition-transform duration-300 ease-in-out min-[1030px]:hidden ${
+      className={`fixed inset-y-0 right-0 z-[60] w-[280px] bg-[#e4e4e4] border-l border-black/10 transition-transform duration-300 ease-in-out min-[1030px]:hidden ${
         isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >

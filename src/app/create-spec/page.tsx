@@ -78,14 +78,14 @@ export default function CreateSpecPage() {
                   type="text"
                   value={specName}
                   onChange={(e) => setSpecName(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff]"
+                  className="w-full px-4 py-3 bg-[#e4e4e4] border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff]"
                   placeholder="Enter spec name"
                 />
               </div>
 
               <div className="flex-1 bg-[#e4e4e4] border-l-4 border-l-[#306bff] border border-black/10 p-6 hover:border-[#306bff]/50 transition-colors shadow-lg">
                 <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Category</label>
-                <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] focus:outline-none focus:border-[#306bff]">
+                <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full px-4 py-3 bg-[#e4e4e4] border border-black/10 text-[#1a1a1a] focus:outline-none focus:border-[#306bff]">
                   <option value="">Select a category</option>
                   <option value="model-training">Model Training</option>
                   <option value="forecasting">Forecasting</option>
@@ -108,7 +108,7 @@ export default function CreateSpecPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff] resize-none"
+                className="w-full px-4 py-3 bg-[#e4e4e4] border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff] resize-none"
                 placeholder="Describe what this spec does..."
               />
             </div>
@@ -121,13 +121,13 @@ export default function CreateSpecPage() {
                   type="file"
                   accept="video/*"
                   onChange={handleVideoChange}
-                  className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] focus:outline-none focus:border-[#306bff]"
+                  className="w-full px-4 py-3 bg-[#e4e4e4] border border-black/10 text-[#1a1a1a] focus:outline-none focus:border-[#306bff]"
                 />
                 <p className="text-xs text-black/50 mt-2">Upload a video to use as the spec thumbnail</p>
               </div>
               <div className="flex-1 bg-[#e4e4e4] border-l-4 border-l-[#306bff] border border-black/10 p-6 hover:border-[#306bff]/50 transition-colors shadow-lg">
                 <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Preview</label>
-                <div className="w-full h-40 bg-white border border-black/10 flex items-center justify-center overflow-hidden relative">
+                <div className="w-full h-40 bg-[#e4e4e4] border border-black/10 flex items-center justify-center overflow-hidden relative">
                   {videoPreview ? (
                     <>
                       <video src={videoPreview} controls className="max-w-full max-h-full" />
@@ -156,13 +156,13 @@ export default function CreateSpecPage() {
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
-                  className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] focus:outline-none focus:border-[#306bff]"
+                  className="w-full px-4 py-3 bg-[#e4e4e4] border border-black/10 text-[#1a1a1a] focus:outline-none focus:border-[#306bff]"
                 />
                 <p className="text-xs text-black/50 mt-2">Upload an image to use as the spec thumbnail</p>
               </div>
               <div className="flex-1 bg-[#e4e4e4] border-l-4 border-l-[#306bff] border border-black/10 p-6 hover:border-[#306bff]/50 transition-colors shadow-lg">
                 <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Preview</label>
-                <div className="w-full h-40 bg-white border border-black/10 flex items-center justify-center overflow-hidden relative">
+                <div className="w-full h-40 bg-[#e4e4e4] border border-black/10 flex items-center justify-center overflow-hidden relative">
                   {imagePreview ? (
                     <>
                       <img src={imagePreview} alt="Preview" className="max-w-full max-h-full object-contain" />
@@ -187,7 +187,7 @@ export default function CreateSpecPage() {
               <label className="block text-sm font-medium text-[#1a1a1a] mb-2">Spec Definition</label>
               <textarea
                 rows={12}
-                className="w-full px-4 py-3 bg-white border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff] resize-none font-mono text-sm"
+                className="w-full px-4 py-3 bg-[#e4e4e4] border border-black/10 text-[#1a1a1a] placeholder-black/50 focus:outline-none focus:border-[#306bff] resize-none font-mono text-sm"
                 placeholder="Enter your spec definition..."
               />
             </div>
