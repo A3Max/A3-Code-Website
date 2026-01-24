@@ -369,8 +369,8 @@ export default function MySpecsPage() {
         />
         
         <div className="pl-[280px] max-[707px]:pl-0">
-          <div className="sticky top-[37px] z-40 bg-[#e4e4e4] shadow-sm">
-            <div className="px-6 pb-4 max-[707px]:px-4 max-[707px]:pb-6">
+          <div className="sticky top-[72px] z-40 bg-[#e4e4e4] shadow-sm">
+            <div className="px-6 pb-4 pt-[13px] max-[707px]:px-4 max-[707px]:pb-6">
               <h1 className="text-4xl font-bold text-[#1a1a1a] mb-4 mt-0 leading-tight max-[707px]:text-3xl max-[640px]:text-2xl max-[375px]:text-xl">My Specs</h1>
               <p className="text-lg text-black/70 max-[707px]:text-base max-[375px]:text-sm max-[707px]:mb-4">
                 Your personal collection of designed and remixed specifications.
@@ -385,7 +385,7 @@ export default function MySpecsPage() {
             </div>
           </div>
 
-          <div className="px-6 pb-12 max-[707px]:px-4 z-20">
+          <div className="px-6 pb-12 max-[707px]:px-4 z-20 pt-[96px]">
             <div ref={specsGridRef} className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(380px,1fr))] max-[707px]:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] max-[640px]:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] max-[375px]:grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
               {filteredSpecs.map((spec, index) => (
                 <MySpecCard

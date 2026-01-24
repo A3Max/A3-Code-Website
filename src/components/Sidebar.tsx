@@ -23,7 +23,7 @@ export default function Sidebar({
 }: SidebarProps) {
   return (
     <div className="w-[280px] flex-shrink-0 fixed top-[72px] left-0 h-[calc(100vh-72px)] flex flex-col px-6 border-r border-black/10 z-40 max-[707px]:hidden">
-      <div className="h-[48px]"></div>
+      <div className="h-[20px]"></div>
       <Link 
         href={isAuthenticated ? "/create-spec" : "/login"}
         className="block w-full px-6 py-3 text-center font-bold bg-[#306bff] text-white hover:bg-[#2555e6] transition-colors mb-6 h-[52px] flex items-center justify-center shadow-lg"
